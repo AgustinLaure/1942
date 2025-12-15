@@ -22,6 +22,9 @@
     <Filter Include="src\math\vector">
       <UniqueIdentifier>{2542f07e-1eac-41cb-bf9a-f61b6e5970e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\player">
+      <UniqueIdentifier>{039d6951-4ed1-498c-85ee-a95e61c9939b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -39,6 +42,9 @@
     <ClCompile Include="src\shape.cpp">
       <Filter>src\math\shape</Filter>
     </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>src\game\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -52,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="src\shape.h">
       <Filter>src\math\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player.h">
+      <Filter>src\game\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

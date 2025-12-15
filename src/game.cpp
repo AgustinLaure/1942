@@ -3,11 +3,17 @@
 #include "raylib.h"
 
 #include "screen.h"
+#include "player.h"
 
 namespace game
 {
 	static bool isRunning = true;
 	static Color backgroundColor = BLACK;
+
+	namespace objects
+	{
+		static player::Player player;
+	}
 
 	static void game();
 	static void init();
@@ -32,6 +38,8 @@ namespace game
 
 	static void init()
 	{
+		objects::player = player::init();
+
 		screen::openWindow();
 	}
 
@@ -46,7 +54,7 @@ namespace game
 
 	static void update()
 	{
-		
+		player::update(objects::player);
 	}
 
 	static void draw()
@@ -54,7 +62,7 @@ namespace game
 		BeginDrawing();
 		ClearBackground(backgroundColor);
 
-		//Draw
+		player::draw(objects::player);
 
 		EndDrawing();
 	}

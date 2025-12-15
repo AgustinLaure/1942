@@ -11,8 +11,9 @@ namespace shape
 		Vector2 pos = { 0,0 };
 	};
 
-	bool isRectOnRect(Vector2 rect1Pos, int rect1Width, int rect1Height, Vector2 rect2Pos, int rect2Width, int rect2Height);
-	bool isPointCollidingRect(Vector2 p, Rectangle rect);
+	Rectangle init(const float width, const float height, const Vector2 pos);
+	bool isRectOnRect(const Vector2 rect1Pos, const int rect1Width, const int rect1Height, const Vector2 rect2Pos, const int rect2Width, const int rect2Height);
+	bool isPointCollidingRect(const Vector2 p, const Rectangle rect);
 }
 
 

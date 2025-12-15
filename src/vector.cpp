@@ -4,14 +4,14 @@
 
 namespace vector
 {
-	float getMagnitude(Vector2 v)
+	float getMagnitude(const Vector2 v)
 	{
 		float magnitude = static_cast<float>(sqrt(v.x * v.x + v.y * v.y));
 
 		return magnitude;
 	}
 
-	Vector2 getNormalized(Vector2 v)
+	Vector2 getNormalized(const Vector2 v)
 	{
 		Vector2 normalized = v;
 
@@ -32,7 +32,7 @@ namespace vector
 	}
 
 	/*
-	float getDegree(Vector2 pos1, Vector2 pos2)
+	float getDegree(const Vector2 pos1, const Vector2 pos2)
 	{
 		float degree = 0.0f;
 
