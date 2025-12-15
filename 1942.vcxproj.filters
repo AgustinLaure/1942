@@ -7,24 +7,51 @@
     <Filter Include="res">
       <UniqueIdentifier>{300195a0-5909-408d-b64c-5f8ddaffb29e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game">
+      <UniqueIdentifier>{cad46d4d-bd8b-45b6-9f56-b178f465276b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\screen">
+      <UniqueIdentifier>{78c21d56-95be-4cdf-ac5e-869cd18bda84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math">
+      <UniqueIdentifier>{ae17c72a-6837-4d9f-8733-5b510568fd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math\shape">
+      <UniqueIdentifier>{a39b2748-0ee2-4e7d-906f-fa293017b3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math\vector">
+      <UniqueIdentifier>{2542f07e-1eac-41cb-bf9a-f61b6e5970e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\game.cpp">
-      <Filter>src</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\screen.cpp">
-      <Filter>src</Filter>
+      <Filter>src\screen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vector.cpp">
+      <Filter>src\math\vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shape.cpp">
+      <Filter>src\math\shape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
-      <Filter>src</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\screen.h">
-      <Filter>src</Filter>
+      <Filter>src\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vector.h">
+      <Filter>src\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shape.h">
+      <Filter>src\math\shape</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

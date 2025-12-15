@@ -32,7 +32,7 @@ namespace game
 
 	static void init()
 	{
-		InitWindow(screen::width, screen::height, screen::name.c_str());
+		screen::openWindow();
 	}
 
 	static void loop()
@@ -61,6 +61,6 @@ namespace game
 
 	static void deinit()
 	{
-		CloseWindow();
+		screen::closeWindow();
 	}
 }

@@ -4,8 +4,7 @@
 
 namespace screen
 {
-	extern int width;
-	extern int height;
-	extern std::string name;
+	void openWindow();
+	void closeWindow();
 }
 
