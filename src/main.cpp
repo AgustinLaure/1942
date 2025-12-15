@@ -1,22 +1,8 @@
-#include "raylib.h"
+#include "game.h"
 
 int main()
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "1942");
-
-    while (!WindowShouldClose())   
-    {
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        EndDrawing();
-    }
-
-    CloseWindow();        
+    game::runGame();
 
     return 0;
 }

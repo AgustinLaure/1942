@@ -146,7 +146,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\screen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
