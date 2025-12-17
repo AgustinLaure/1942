@@ -22,11 +22,14 @@
     <Filter Include="src\math\vector">
       <UniqueIdentifier>{2542f07e-1eac-41cb-bf9a-f61b6e5970e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\player">
-      <UniqueIdentifier>{039d6951-4ed1-498c-85ee-a95e61c9939b}</UniqueIdentifier>
+    <Filter Include="src\game\entitites">
+      <UniqueIdentifier>{b9305bc8-db1c-4a64-ba2e-835fad864485}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\bullet">
-      <UniqueIdentifier>{49c3ac5a-049b-4138-8dd2-cf3cf285fa1d}</UniqueIdentifier>
+    <Filter Include="src\game\entitites\player">
+      <UniqueIdentifier>{b2121c49-5384-4c62-b9ab-9f14882d6684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\entitites\bullet">
+      <UniqueIdentifier>{b80a41d2-18b9-48d9-8145-e93a5d139d48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,10 +49,10 @@
       <Filter>src\math\shape</Filter>
     </ClCompile>
     <ClCompile Include="src\player.cpp">
-      <Filter>src\game\player</Filter>
+      <Filter>src\game\entitites\player</Filter>
     </ClCompile>
     <ClCompile Include="src\bullet.cpp">
-      <Filter>src\game\bullet</Filter>
+      <Filter>src\game\entitites\bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,10 +69,10 @@
       <Filter>src\math\shape</Filter>
     </ClInclude>
     <ClInclude Include="src\player.h">
-      <Filter>src\game\player</Filter>
+      <Filter>src\game\entitites\player</Filter>
     </ClInclude>
     <ClInclude Include="src\bullet.h">
-      <Filter>src\game\bullet</Filter>
+      <Filter>src\game\entitites\bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
