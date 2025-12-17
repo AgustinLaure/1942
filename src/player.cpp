@@ -9,6 +9,7 @@ namespace player
 {
 	Texture2D Player::sprite;
 	Sound Player::lowHpSound;
+	Sound Player::explosion;
 
 	//InitialConfig
 	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, { 0,0 });
@@ -17,8 +18,11 @@ namespace player
 	static const float scoreAddPerHit = 5.f;
 	static const float scoreAddPerKill = 13.f;
 
+	//Sound
 	static const float timeBetweenlowHpSound = 1.f;
-	static const float lowHpSoundScale = 0.3f;
+
+	static const float lowHpSoundScale = 0.f;
+	static const float explosionSoundScale = 0.2f;
 
 	static const Vector2 constShootDir = { 0,-1 };
 	static const float constInitialSpeed = 500.f;
@@ -43,19 +47,26 @@ namespace player
 	static void die(Player& player);
 	static void lowHpSound(Player& player, const float delta);
 
-	static std::string playerSpriteRoute = "res/sprites/player/player_plane.png";
+	static const std::string spriteRoute = "res/sprites/player/player_plane.png";
+	static const std::string lowHpRoute = "res/sounds/sfx/player/low_hp.wav";
+	static const std::string explosionRoute = "res/sounds/sfx/player/explosion.wav";
 
 	Player init()
 	{
 		if (!IsTextureValid(Player::sprite))
 		{
-			Player::sprite = LoadTexture(playerSpriteRoute.c_str());
+			Player::sprite = LoadTexture(spriteRoute.c_str());
+		}
+		if (!IsSoundValid(Player::explosion))
+		{
+			Player::explosion = LoadSound(explosionRoute.c_str());
+			SetSoundVolume(Player::explosion, explosionSoundScale);
 		}
 		if (!IsSoundValid(Player::lowHpSound))
 		{
-			Player::lowHpSound = LoadSound("res/sounds/sfx/player/low_hp.wav");
+			Player::lowHpSound = LoadSound(lowHpRoute.c_str());
 		}
-
+		
 		Player newPlayer;
 
 		newPlayer.isAlive = true;
@@ -87,6 +98,7 @@ namespace player
 		//}
 		UnloadTexture(Player::sprite);
 		UnloadSound(Player::lowHpSound);
+		UnloadSound(Player::explosion);
 	}
 
 	void update(Player& player, float deltaTime)
@@ -218,6 +230,8 @@ namespace player
 
 	static void die(Player& player)
 	{
+		PlaySound(Player::explosion);
+
 		player.isAlive = false;
 	}
 

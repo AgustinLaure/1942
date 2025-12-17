@@ -7,6 +7,8 @@ namespace player
 	static const int maxBulletsPool = 50;
 	struct Player
 	{
+		static Sound explosion;
+
 		bool isAlive = true;
 
 		shape::Rectangle hitBox = {};

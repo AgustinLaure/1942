@@ -8,6 +8,12 @@
 namespace bullet
 {
 	Texture2D Bullet::sprite;
+	Sound Bullet::impact;
+
+	static const std::string spriteRoute = "res/sprites/bullet/bullet.png";
+	static const std::string impactRoute = "res/sounds/sfx/bullet/impact.wav";
+
+	static const float impactVolumeScale = 0.2f;
 
 	static void move(Bullet& bullet, const float delta);
 	static void checkOutBounds(Bullet& bullet);
@@ -17,7 +23,12 @@ namespace bullet
 	{
 		if (!IsTextureValid(Bullet::sprite))
 		{
-			Bullet::sprite = LoadTexture(preset.spriteRoute.c_str());
+			Bullet::sprite = LoadTexture(spriteRoute.c_str());
+		}
+		if (!IsSoundValid(Bullet::impact))
+		{
+			Bullet::impact = LoadSound(impactRoute.c_str());
+			SetSoundVolume(Bullet::impact, impactVolumeScale);
 		}
 
 		Bullet newBullet;
@@ -34,7 +45,15 @@ namespace bullet
 
 	void deinit()
 	{
-		UnloadTexture(Bullet::sprite);
+		if (IsTextureValid(Bullet::sprite))
+		{
+			UnloadTexture(Bullet::sprite);
+		}
+
+		if (IsSoundValid(Bullet::impact))
+		{
+			UnloadSound(Bullet::impact);
+		}
 	}
 
 	void update(Bullet& bullet, const float delta)
@@ -86,5 +105,6 @@ namespace bullet
 	static void die(Bullet& bullet)
 	{
 		bullet.isAlive = false;
+		PlaySound(Bullet::impact);
 	}
 }

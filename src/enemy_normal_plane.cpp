@@ -8,6 +8,7 @@
 namespace enemyNormalPlane
 {
 	Texture2D EnemyNormalPlane::sprite;
+	Sound EnemyNormalPlane::explosion;
 
 	//Config
 	static const float constHeight = 30.f;
@@ -21,11 +22,23 @@ namespace enemyNormalPlane
 	static const float constInitialShootImprecision = 1.f; //Degrees
 	static const float constInitialCrashDamage = 3.f;
 
+	//Sound
+	static const float explosionVolumeScale = 0.3f;
+
+	static const std::string spriteRoute = "res/sprites/enemies/normal_enemy.png";
+	static const std::string explosionRoute = "res/sounds/sfx/enemy/explosion.wav";
+
 	EnemyNormalPlane init()
 	{
 		if (!IsTextureValid(EnemyNormalPlane::sprite))
 		{
-			EnemyNormalPlane::sprite = LoadTexture("res/sprites/enemies/normal_enemy.png");
+			EnemyNormalPlane::sprite = LoadTexture(spriteRoute.c_str());
+		}
+
+		if (!IsSoundValid(EnemyNormalPlane::explosion))
+		{
+			EnemyNormalPlane::explosion = LoadSound(explosionRoute.c_str());
+			SetSoundVolume(EnemyNormalPlane::explosion, explosionVolumeScale);
 		}
 
 		EnemyNormalPlane newPlane;
@@ -52,6 +65,7 @@ namespace enemyNormalPlane
 	void deinit()
 	{
 		UnloadTexture(EnemyNormalPlane::sprite);
+		UnloadSound(EnemyNormalPlane::explosion);
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float deltaTime);
@@ -184,5 +198,6 @@ namespace enemyNormalPlane
 	static void die(EnemyNormalPlane& plane)
 	{
 		plane.isAlive = false;
+		PlaySound(EnemyNormalPlane::explosion);
 	}
 }

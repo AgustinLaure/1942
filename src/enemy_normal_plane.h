@@ -10,6 +10,8 @@ namespace enemyNormalPlane
 	static const int maxBulletsPool = 50;
 	struct EnemyNormalPlane
 	{
+		static Sound explosion;
+
 		bool isAlive = false;
 
 		shape::Rectangle hitBox = {};

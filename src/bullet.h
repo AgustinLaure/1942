@@ -10,6 +10,8 @@ namespace bullet
 {
 	struct Bullet
 	{
+		static Sound impact;
+
 		bool isAlive = false;
 		shape::Rectangle hitBox = {};
 		Vector2 dir = {};
@@ -30,7 +32,6 @@ namespace bullet
 		float speed;
 		float damage;
 		Color color;
-		std::string spriteRoute;
 	};
 
 	static const int maxBulletPresets = 1;
@@ -46,7 +47,6 @@ namespace bullet
 		650.f,									//Speed
 		1.f,
 		WHITE,									//Color
-		"res/sprites/bullet/bullet.png"			//SpriteRoute
 		}
 	};
 
