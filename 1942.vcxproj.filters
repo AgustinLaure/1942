@@ -40,6 +40,12 @@
     <Filter Include="src\game\enemySpawner">
       <UniqueIdentifier>{7298da08-da44-4c79-bcba-d089bbf08727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\label">
+      <UniqueIdentifier>{4627616d-ecc0-438e-9927-ef99f88b8e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\button">
+      <UniqueIdentifier>{919ef613-7c21-4892-9091-1dad6ee7123e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -69,6 +75,12 @@
     <ClCompile Include="src\enemy_spawner.cpp">
       <Filter>src\game\enemySpawner</Filter>
     </ClCompile>
+    <ClCompile Include="src\button.cpp">
+      <Filter>src\button</Filter>
+    </ClCompile>
+    <ClCompile Include="src\label.cpp">
+      <Filter>src\label</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -97,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="src\enemies.h">
       <Filter>src\game\entitites\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\button.h">
+      <Filter>src\button</Filter>
+    </ClInclude>
+    <ClInclude Include="src\label.h">
+      <Filter>src\label</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
