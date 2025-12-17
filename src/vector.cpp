@@ -70,6 +70,7 @@ namespace vector
 		return degree;
 	}
 	*/
+
 	Vector2 getDir(float degree)
 	{
 		degree *= DEG2RAD;
