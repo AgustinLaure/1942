@@ -1,12 +1,8 @@
 #include "game.h"
 
-//const float EPSILON = 0.00001f;
-
 #include "player.h"
-#include "enemy_normal_plane.h"
+#include "enemy_spawner.h"
 #include "screen.h"
-
-#include "raymath.h"
 
 namespace game
 {
@@ -14,20 +10,8 @@ namespace game
 	static Color backgroundColor = BLACK;
 	static float deltaTime = 0.f;
 
-	const float constInitialEnemySpawnCooldown = 0.3f;
-	static float enemySpawnCooldown = constInitialEnemySpawnCooldown;
-
-	//Enemies
-	static const int enemyTypes = 1;
-	enum class EnemyTypes
-	{
-		Normal
-	};
-
 	static const int enemyNormalPlanePoolSize = 30;
 	//etc
-
-	static const Vector2 constEnemyDir = { 0.f, 1.f };
 
 	namespace objects
 	{
@@ -88,13 +72,7 @@ namespace game
 	{
 		player::update(objects::player, deltaTime);
 
-		enemySpawnCooldown -= deltaTime;
-
-		if (enemySpawnCooldown < EPSILON)
-		{
-			spawnEnemy();
-			enemySpawnCooldown = constInitialEnemySpawnCooldown;
-		}
+		enemySpawner::update(objects::enemyNormalPlanes, enemyNormalPlanePoolSize, deltaTime);
 
 		updateEnemies(objects::player);
 	}
@@ -135,42 +113,5 @@ namespace game
 				enemyNormalPlane::draw(objects::enemyNormalPlanes[i]);
 			}
 		}
-	}
-
-	static void spawnEnemy()
-	{
-		EnemyTypes chosenType = static_cast<EnemyTypes>(GetRandomValue(0, enemyTypes-1));
-
-		switch (chosenType)
-		{
-		case game::EnemyTypes::Normal:
-			launchEnemyNormalPlane(getEnemySpawnPos(enemyNormalPlane::constWidth));
-			break;
-
-		default:
-
-			break;
-		}
-	}
-
-	static void launchEnemyNormalPlane(const Vector2 chosenPos)
-	{
-		enemyNormalPlane::EnemyNormalPlane* availablePlane = nullptr;
-
-		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
-		{
-			if (!objects::enemyNormalPlanes[i].isAlive)
-			{
-				availablePlane = &objects::enemyNormalPlanes[i];
-				break;
-			}
-		}
-
-		enemyNormalPlane::launch(*availablePlane, chosenPos, constEnemyDir);
-	}
-
-	static Vector2 getEnemySpawnPos(const float planeWidth)
-	{
-		return { static_cast<float>(GetRandomValue(static_cast<int>(planeWidth), screen::width - static_cast<int>(planeWidth))), 1.f };
 	}
 }

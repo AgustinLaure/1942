@@ -37,6 +37,9 @@
     <Filter Include="src\game\entitites\enemies\normal_plane">
       <UniqueIdentifier>{de71ea97-a0fe-48b2-955b-e2d0c06a9411}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\enemySpawner">
+      <UniqueIdentifier>{7298da08-da44-4c79-bcba-d089bbf08727}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -63,6 +66,9 @@
     <ClCompile Include="src\enemy_normal_plane.cpp">
       <Filter>src\game\entitites\enemies\normal_plane</Filter>
     </ClCompile>
+    <ClCompile Include="src\enemy_spawner.cpp">
+      <Filter>src\game\enemySpawner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -85,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="src\enemy_normal_plane.h">
       <Filter>src\game\entitites\enemies\normal_plane</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy_spawner.h">
+      <Filter>src\game\enemySpawner</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemies.h">
+      <Filter>src\game\entitites\enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
