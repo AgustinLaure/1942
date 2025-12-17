@@ -8,7 +8,7 @@
 namespace playing
 {
 	static const label::FontName scoreHUDFont = label::FontName::Militar;
-	static const Color scoreHUDColor = WHITE;
+	static const Color scoreHUDColor = BLACK;
 
 	static const Vector2 scoreHUDPos = { screen::width - 200, screen::height - 100 };
 	static const std::string scoreHUDText = "Score: ";
@@ -16,7 +16,7 @@ namespace playing
 	static const int scoreHUDSpacing = 2;
 
 	static const label::FontName hpHUDFont = label::FontName::Militar;
-	static const Color hpHUDColor = WHITE;
+	static const Color hpHUDColor = BLACK;
 
 	static const Vector2 hpHUDPos = { 100, screen::height - 100 };
 	static const std::string hpHUDText = "HP: ";

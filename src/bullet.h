@@ -23,7 +23,8 @@ namespace bullet
 
 	enum class BulletType
 	{
-		Normal
+		Normal,
+		Slow
 	};
 
 	struct BulletPreset
@@ -34,7 +35,7 @@ namespace bullet
 		Color color;
 	};
 
-	static const int maxBulletPresets = 1;
+	static const int maxBulletPresets = 2;
 	const BulletPreset bulletPresets[maxBulletPresets] =
 	{
 		{ //Normal
@@ -47,7 +48,19 @@ namespace bullet
 		650.f,									//Speed
 		1.f,
 		WHITE,									//Color
+		},
+		{ //Slow
+
+		{										//Hitbox
+			5.f,								//Width
+			10.f,								//Height
+			{0.f,0.f}							//Pos
+		},
+		300.f,									//Speed
+		1.f,
+		WHITE,									//Color
 		}
+
 	};
 
 	Bullet init(const BulletPreset preset, const Vector2 dir);

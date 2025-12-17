@@ -18,8 +18,8 @@ namespace enemyNormalPlane
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 2.f;
 	static const Color constInitialColor = WHITE;
-	static const float constInitialShootcooldown = 0.5f;
-	static const float constInitialShootImprecision = 1.f; //Degrees
+	static const float constInitialShootcooldown = 0.2f;
+	static const float constInitialShootImprecision = 10.f; //Degrees
 	static const float constInitialCrashDamage = 3.f;
 
 	//Sound
@@ -53,7 +53,7 @@ namespace enemyNormalPlane
 
 		for (int i = 0; i < maxBulletsPool; i++)
 		{
-			newPlane.bullets[i] = bullet::init(bullet::bulletPresets[static_cast<int>(bullet::BulletType::Normal)], { 0.f,0.f });
+			newPlane.bullets[i] = bullet::init(bullet::bulletPresets[static_cast<int>(bullet::BulletType::Slow)], { 0.f,0.f });
 		}
 
 		newPlane.shootCooldown = 0.f;

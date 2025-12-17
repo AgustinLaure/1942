@@ -7,7 +7,7 @@ namespace enemyNormalPlane
 {
 	const float constWidth = 50.f;
 
-	static const int maxBulletsPool = 50;
+	static const int maxBulletsPool = 300;
 	struct EnemyNormalPlane
 	{
 		static Sound explosion;

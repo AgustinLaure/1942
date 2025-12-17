@@ -13,7 +13,7 @@ namespace player
 
 	//InitialConfig
 	static const Vector2 constIniPos = { screen::width / 2, screen::height - 125.f };
-	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, constIniPos);
+	static const shape::Rectangle constHitBoxShape = shape::initRectangle(50, 50, constIniPos);
 	static const float constScoreAddPerHit = 5.f;
 	static const float constScoreAddPerKill = 13.f;
 
