@@ -17,7 +17,7 @@ namespace player
 	};
 
 	Player init();
-	void update(Player& player);
+	void update(Player& player, float deltaTime);
 	void draw(const Player player);
 }
 

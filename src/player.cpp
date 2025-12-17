@@ -25,9 +25,10 @@ namespace player
 		return newPlayer;
 	}
 
-	void update(Player& player)
+	void update(Player& player, float deltaTime)
 	{
-		player.damage += 0;
+		player;
+		
 	}
 
 	void draw(const Player player)

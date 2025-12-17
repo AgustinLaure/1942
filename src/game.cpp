@@ -9,6 +9,7 @@ namespace game
 {
 	static bool isRunning = true;
 	static Color backgroundColor = BLACK;
+	static float deltaTime = 0.f;
 
 	namespace objects
 	{
@@ -47,6 +48,7 @@ namespace game
 	{
 		while (!WindowShouldClose() && isRunning)
 		{
+			deltaTime = GetFrameTime();
 			update();
 			draw();
 		}
@@ -54,7 +56,7 @@ namespace game
 
 	static void update()
 	{
-		player::update(objects::player);
+		player::update(objects::player, deltaTime);
 	}
 
 	static void draw()
