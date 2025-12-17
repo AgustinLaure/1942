@@ -7,7 +7,7 @@ namespace creditsScreen
 {
 	static const Color backgroundColor = BLACK;
 
-	static const std::string creditsFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName creditFont = label::FontName::Militar;
 	static const Color creditsColor = WHITE;
 
 	static const Vector2 credits1Pos = { 100, 100 };
@@ -26,7 +26,7 @@ namespace creditsScreen
 	static const int credits3Spacing = 2;
 
 	//AllButtons
-	static const std::string buttonFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName buttonFont= label::FontName::Militar;
 	static const Color buttonTextColor = WHITE;
 	static const Color buttonBoxColor = RED;
 
@@ -58,20 +58,11 @@ namespace creditsScreen
 
 	void init()
 	{
-		objects::credits1 = label::init(credits1Pos, credits1Text, creditsFontRoute, credits1FontSize, credits1Spacing, creditsColor);
-		objects::credits2 = label::init(credits2Pos, credits2Text, creditsFontRoute, credits2FontSize, credits2Spacing, creditsColor);
-		objects::credits3 = label::init(credits3Pos, credits3Text, creditsFontRoute, credits3FontSize, credits3Spacing, creditsColor);
+		objects::credits1 = label::init(credits1Pos, credits1Text, creditFont, credits1FontSize, credits1Spacing, creditsColor);
+		objects::credits2 = label::init(credits2Pos, credits2Text, creditFont, credits2FontSize, credits2Spacing, creditsColor);
+		objects::credits3 = label::init(credits3Pos, credits3Text, creditFont, credits3FontSize, credits3Spacing, creditsColor);
 
-		objects::backButton = button::init(backWidth, backHeight, backPos, backText, buttonFontRoute, backFontSize, backSpacing, buttonTextColor, buttonBoxColor);
-	}
-
-	void deinit()
-	{
-		label::deinit(objects::credits1);
-		label::deinit(objects::credits2);
-		label::deinit(objects::credits3);
-
-		button::deinit(objects::backButton);
+		objects::backButton = button::init(backWidth, backHeight, backPos, backText, buttonFont, backFontSize, backSpacing, buttonTextColor, buttonBoxColor);
 	}
 
 	static void update(mainMenuScreen::Screens& currentMainMenuScreen)

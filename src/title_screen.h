@@ -7,6 +7,5 @@ namespace titleScreen
 {
 	void titleScreen(gameScene::Scenes& currentGameScene, mainMenuScreen::Screens& currentMainMenuScreen);
 	void init();
-	void deinit();
 }
 

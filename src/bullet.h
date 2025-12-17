@@ -16,7 +16,7 @@ namespace bullet
 		float speed = 0.f;
 		float damage = 0.f;
 		Color color = WHITE;
-		Texture2D sprite;
+		static Texture2D sprite;
 	};
 
 	enum class BulletType
@@ -51,7 +51,7 @@ namespace bullet
 	};
 
 	Bullet init(const BulletPreset preset, const Vector2 dir);
-	void deinit(Bullet& bullet);
+	void deinit();
 	void update(Bullet& bullet, const float delta);
 	void draw(Bullet& bullet);
 	void shoot(Bullet& bullet, const Vector2 pos, const Vector2 dir);

@@ -7,6 +7,8 @@
 
 namespace enemyNormalPlane
 {
+	Texture2D EnemyNormalPlane::sprite;
+
 	//Config
 	static const float constHeight = 30.f;
 	static const float constBulletSpawnOffset = 10.f;
@@ -21,6 +23,11 @@ namespace enemyNormalPlane
 
 	EnemyNormalPlane init()
 	{
+		if (!IsTextureValid(EnemyNormalPlane::sprite))
+		{
+			EnemyNormalPlane::sprite = LoadTexture("res/sprites/enemies/normal_enemy.png");
+		}
+
 		EnemyNormalPlane newPlane;
 
 		newPlane.isAlive = false;
@@ -37,15 +44,14 @@ namespace enemyNormalPlane
 		}
 
 		newPlane.shootCooldown = 0.f;
-		newPlane.sprite = LoadTexture("res/sprites/enemies/normal_enemy.png");
 		newPlane.color = constInitialColor;
 
 		return newPlane;
 	}
 
-	void deinit(EnemyNormalPlane& plane)
+	void deinit()
 	{
-		UnloadTexture(plane.sprite);
+		UnloadTexture(EnemyNormalPlane::sprite);
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float deltaTime);
@@ -61,7 +67,6 @@ namespace enemyNormalPlane
 	{
 		if (plane.isAlive)
 		{
-
 			plane.shootCooldown -= deltaTime;
 
 			move(plane, deltaTime);

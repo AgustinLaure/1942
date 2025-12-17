@@ -5,5 +5,6 @@
 namespace enemySpawner
 {
 	void update(enemyNormalPlane::EnemyNormalPlane enemyNormalPlanes[], const int enemyNormalPlanePoolSize, const float deltaTime);
+	void reset();
 }
 

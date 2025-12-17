@@ -62,4 +62,9 @@ namespace enemySpawner
 	{
 		return { static_cast<float>(GetRandomValue(static_cast<int>(planeWidth), screen::width - static_cast<int>(planeWidth))), 1.f };
 	}
+
+	void reset()
+	{
+		enemySpawnCooldown = constInitialEnemySpawnCooldown;
+	}
 }

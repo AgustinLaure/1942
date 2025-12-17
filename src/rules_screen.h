@@ -7,7 +7,6 @@ namespace rulesScreen
 {
 	void rulesScreen(mainMenuScreen::Screens& currentMainMenuScreen);
 	void init();
-	void deinit();
 }
 
 

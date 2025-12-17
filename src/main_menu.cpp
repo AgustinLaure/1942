@@ -57,9 +57,5 @@ namespace mainMenu
 	void deinit()
 	{
 		UnloadMusicStream(objects::menuMusic);
-
-		titleScreen::deinit();
-		rulesScreen::deinit();
-		creditsScreen::deinit();
 	}
 }

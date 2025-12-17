@@ -9,7 +9,7 @@ namespace button
 
 	Sound Button::onSelect;
 
-	Button init(const float width, const float height, const Vector2 pos, const std::string text, const std::string fontRoute, const float fontSize, const float spacing, const Color textColor, const Color bckgColor)
+	Button init(const float width, const float height, const Vector2 pos, const std::string text, const label::FontName font, const float fontSize, const float spacing, const Color textColor, const Color bckgColor)
 	{
 		if (Button::onSelect.frameCount < EPSILON)
 		{
@@ -22,7 +22,7 @@ namespace button
 		newButton.body.width = width;
 		newButton.body.height = height;
 		newButton.body.pos = pos;
-		newButton.text = label::init(newButton.body.pos, text, fontRoute, fontSize, spacing, textColor);
+		newButton.text = label::init(newButton.body.pos, text, font, fontSize, spacing, textColor);
 		newButton.color = bckgColor;
 		newButton.isPressed = false;
 
@@ -49,13 +49,14 @@ namespace button
 		DrawRectangleLines(static_cast<int>(button.body.pos.x), static_cast<int>(button.body.pos.y), static_cast<int>(button.body.width), static_cast<int>(button.body.height), button.color);
 	}
 
-	void deinit(Button& button)
+	void deinit()
 	{
-		label::deinit(button.text);
-
 		if (Button::onSelect.frameCount < EPSILON)
 		{
-			UnloadSound(button.onSelect);
+			if (IsSoundValid(Button::onSelect))
+			{
+				UnloadSound(Button::onSelect);
+			}
 		}
 	}
 }

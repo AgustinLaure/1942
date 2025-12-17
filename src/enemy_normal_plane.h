@@ -22,13 +22,13 @@ namespace enemyNormalPlane
 		bullet::Bullet bullets[maxBulletsPool] = {};
 		float shootCooldown = 0.f;
 
-		Texture2D sprite;
+		static Texture2D sprite;
 
 		Color color = WHITE;
 	};
 
 	EnemyNormalPlane init();
-	void deinit(EnemyNormalPlane& plane);
+	void deinit();
 	void update(EnemyNormalPlane& plane, const player::Player player, const float deltaTime);
 	void draw(EnemyNormalPlane& plane);
 	void launch(EnemyNormalPlane& plane, const Vector2 pos, const Vector2 dir);

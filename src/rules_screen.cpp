@@ -7,7 +7,7 @@ namespace rulesScreen
 {
 	static const Color backgroundColor = BLACK;
 
-	static const std::string rulesFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName rulesFont = label::FontName::Militar;
 	static const Color rulesColor = WHITE;
 
 	static const Vector2 rules1Pos = {100, 100};
@@ -31,7 +31,7 @@ namespace rulesScreen
 	static const int rules4Spacing = 2;
 
 	//AllButtons
-	static const std::string buttonFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName buttonFont = label::FontName::Militar;
 	static const Color buttonTextColor = WHITE;
 	static const Color buttonBoxColor = RED;
 
@@ -64,22 +64,12 @@ namespace rulesScreen
 
 	void init()
 	{
-		objects::rules1 = label::init(rules1Pos,rules1Text,rulesFontRoute,rules1FontSize,rules1Spacing,rulesColor);
-		objects::rules2 = label::init(rules2Pos,rules2Text,rulesFontRoute,rules2FontSize,rules2Spacing,rulesColor);
-		objects::rules3 = label::init(rules3Pos,rules3Text,rulesFontRoute,rules3FontSize,rules3Spacing,rulesColor);
-		objects::rules4 = label::init(rules4Pos,rules4Text,rulesFontRoute,rules4FontSize,rules4Spacing,rulesColor);
+		objects::rules1 = label::init(rules1Pos,rules1Text,rulesFont,rules1FontSize,rules1Spacing,rulesColor);
+		objects::rules2 = label::init(rules2Pos,rules2Text,rulesFont,rules2FontSize,rules2Spacing,rulesColor);
+		objects::rules3 = label::init(rules3Pos,rules3Text,rulesFont,rules3FontSize,rules3Spacing,rulesColor);
+		objects::rules4 = label::init(rules4Pos,rules4Text,rulesFont,rules4FontSize,rules4Spacing,rulesColor);
 
-		objects::backButton = button::init(backWidth, backHeight, backPos, backText, buttonFontRoute, backFontSize, backSpacing, buttonTextColor, buttonBoxColor);
-	}
-
-	void deinit()
-	{
-		label::deinit(objects::rules1);
-		label::deinit(objects::rules2);
-		label::deinit(objects::rules3);
-		label::deinit(objects::rules4);
-
-		button::deinit(objects::backButton);
+		objects::backButton = button::init(backWidth, backHeight, backPos, backText, buttonFont, backFontSize, backSpacing, buttonTextColor, buttonBoxColor);
 	}
 
 	static void update(mainMenuScreen::Screens& currentMainMenuScreen)

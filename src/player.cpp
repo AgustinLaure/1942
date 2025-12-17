@@ -7,10 +7,18 @@
 
 namespace player
 {
+	Texture2D Player::sprite;
+	Sound Player::lowHpSound;
+
 	//InitialConfig
 	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, { 0,0 });
 	static const Vector2 constBulletSpawnOffset = { constHitBoxShape.width / 2, -10.f };
 	static const float constShootCooldown = 0.5f;
+	static const float scoreAddPerHit = 5.f;
+	static const float scoreAddPerKill = 13.f;
+
+	static const float timeBetweenlowHpSound = 1.f;
+	static const float lowHpSoundScale = 0.3f;
 
 	static const Vector2 constShootDir = { 0,-1 };
 	static const float constInitialSpeed = 500.f;
@@ -33,11 +41,21 @@ namespace player
 	static void move(Player& player, float deltaTime);
 	static void takeDamage(Player& player, const float damage);
 	static void die(Player& player);
+	static void lowHpSound(Player& player, const float delta);
 
 	static std::string playerSpriteRoute = "res/sprites/player/player_plane.png";
 
 	Player init()
 	{
+		if (!IsTextureValid(Player::sprite))
+		{
+			Player::sprite = LoadTexture(playerSpriteRoute.c_str());
+		}
+		if (!IsSoundValid(Player::lowHpSound))
+		{
+			Player::lowHpSound = LoadSound("res/sounds/sfx/player/low_hp.wav");
+		}
+
 		Player newPlayer;
 
 		newPlayer.isAlive = true;
@@ -47,7 +65,8 @@ namespace player
 		newPlayer.speed = constInitialSpeed;
 		newPlayer.damage = constInitialDamage;
 		newPlayer.hp = constInitialHp;
-		newPlayer.sprite = LoadTexture(playerSpriteRoute.c_str());
+
+		SetSoundVolume(newPlayer.lowHpSound, lowHpSoundScale);
 
 		for (int i = 0; i < maxBulletsPool; i++)
 		{
@@ -60,13 +79,14 @@ namespace player
 		return newPlayer;
 	}
 
-	void deinit(Player& player)
+	void deinit()
 	{
-		for (int i = 0; i < maxBulletsPool; i++)
-		{
-			bullet::deinit(player.bullets[i]);
-		}
-		UnloadTexture(player.sprite);
+		//for (int i = 0; i < maxBulletsPool; i++)
+		//{
+		//	bullet::deinit(player.bullets[i]);
+		//}
+		UnloadTexture(Player::sprite);
+		UnloadSound(Player::lowHpSound);
 	}
 
 	void update(Player& player, float deltaTime)
@@ -76,6 +96,11 @@ namespace player
 		action(player, deltaTime);
 
 		updateBullets(player.bullets, deltaTime);
+
+		if (player.hp < constInitialHp / 2)
+		{
+			lowHpSound(player, deltaTime);
+		}
 	}
 
 	void draw(Player player)
@@ -94,6 +119,16 @@ namespace player
 	void onCrash(Player& player)
 	{
 		takeDamage(player, constInitialCrashDamage);
+	}
+
+	void scoreAddHit(Player& player)
+	{
+		player.score += scoreAddPerHit;
+	}
+
+	void scoreAddKill(Player& player)
+	{
+		player.score += scoreAddPerKill;
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float delta)
@@ -184,5 +219,16 @@ namespace player
 	static void die(Player& player)
 	{
 		player.isAlive = false;
+	}
+
+	static void lowHpSound(Player& player, const float delta)
+	{
+		player.lowHpCooldown -= delta;
+
+		if (player.lowHpCooldown < EPSILON && player.hp < constInitialHp)
+		{
+			player.lowHpCooldown = timeBetweenlowHpSound;
+			PlaySound(player.lowHpSound);
+		}
 	}
 }

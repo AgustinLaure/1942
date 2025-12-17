@@ -10,7 +10,7 @@ namespace titleScreen
 	//Title
 	static const std::string titleText = "1942";
 	static const int titleFontSize = 120;
-	static const std::string titleFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName titleFont = label::FontName::Militar;
 	static const Vector2 titlePos = { screen::width / 2 - 100, 100 };
 	static const int titleSpacing = 3;
 	static const Color titleColor = WHITE;
@@ -18,13 +18,13 @@ namespace titleScreen
 	//Version
 	static const std::string versionText = "v0.5";
 	static const int versionFontSize = 30;
-	static const std::string versionFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName versionFont = label::FontName::Militar;
 	static const Vector2 versionPos = { screen::width - 100, screen::height-50};
 	static const int versionSpacing = 3;
 	static const Color versionColor = WHITE;
 
 	//AllButtons
-	static const std::string buttonFontRoute = "res/fonts/militar_font.otf";
+	static const label::FontName buttonFont = label::FontName::Militar;
 	static const Color buttonTextColor = WHITE;
 	static const Color buttonBoxColor = RED;
 
@@ -82,24 +82,13 @@ namespace titleScreen
 
 	void init()
 	{
-		objects::title = label::init(titlePos, titleText, titleFontRoute, titleFontSize, titleSpacing, titleColor);
-		objects::version = label::init(versionPos, versionText, versionFontRoute, versionFontSize, versionSpacing, versionColor);
+		objects::title = label::init(titlePos, titleText, titleFont, titleFontSize, titleSpacing, titleColor);
+		objects::version = label::init(versionPos, versionText, versionFont, versionFontSize, versionSpacing, versionColor);
 
-		objects::playButton = button::init(playWidth, playHeight, playPos, playText, buttonFontRoute, playFontSize, playSpacing, buttonTextColor, buttonBoxColor);
-		objects::rulesButton = button::init(rulesWidth, rulesHeight, rulesPos, rulesText, buttonFontRoute, rulesFontSize, rulesSpacing, buttonTextColor, buttonBoxColor);
-		objects::creditsButton = button::init(creditsWidth, creditsHeight, creditsPos, creditsText, buttonFontRoute, creditsFontSize, creditsSpacing, buttonTextColor, buttonBoxColor);
-		objects::exitButton = button::init(exitWidth, exitHeight, exitPos, exitText, buttonFontRoute, exitFontSize, exitSpacing, buttonTextColor, buttonBoxColor);
-	}
-
-	void deinit()
-	{
-		label::deinit(objects::title);
-		label::deinit(objects::version);
-
-		button::deinit(objects::playButton);
-		button::deinit(objects::rulesButton);
-		button::deinit(objects::creditsButton);
-		button::deinit(objects::exitButton);
+		objects::playButton = button::init(playWidth, playHeight, playPos, playText, buttonFont, playFontSize, playSpacing, buttonTextColor, buttonBoxColor);
+		objects::rulesButton = button::init(rulesWidth, rulesHeight, rulesPos, rulesText, buttonFont, rulesFontSize, rulesSpacing, buttonTextColor, buttonBoxColor);
+		objects::creditsButton = button::init(creditsWidth, creditsHeight, creditsPos, creditsText, buttonFont, creditsFontSize, creditsSpacing, buttonTextColor, buttonBoxColor);
+		objects::exitButton = button::init(exitWidth, exitHeight, exitPos, exitText, buttonFont, exitFontSize, exitSpacing, buttonTextColor, buttonBoxColor);
 	}
 
 	static void update(gameScene::Scenes& currentGameScene, mainMenuScreen::Screens& currentMainMenuScreen)

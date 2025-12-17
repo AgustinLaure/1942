@@ -7,12 +7,19 @@
 
 namespace bullet
 {
+	Texture2D Bullet::sprite;
+
 	static void move(Bullet& bullet, const float delta);
 	static void checkOutBounds(Bullet& bullet);
 	static void die(Bullet& bullet);
 
 	Bullet init(const BulletPreset preset, const Vector2 dir)
 	{
+		if (!IsTextureValid(Bullet::sprite))
+		{
+			Bullet::sprite = LoadTexture(preset.spriteRoute.c_str());
+		}
+
 		Bullet newBullet;
 
 		newBullet.isAlive = false;
@@ -21,14 +28,13 @@ namespace bullet
 		newBullet.speed = preset.speed;
 		newBullet.damage = preset.damage;
 		newBullet.color = preset.color;
-		newBullet.sprite = LoadTexture(preset.spriteRoute.c_str());
 
 		return newBullet;
 	}
 
-	void deinit(Bullet& bullet)
+	void deinit()
 	{
-		UnloadTexture(bullet.sprite);
+		UnloadTexture(Bullet::sprite);
 	}
 
 	void update(Bullet& bullet, const float delta)

@@ -7,6 +7,5 @@ namespace creditsScreen
 {
 	void creditsScreen(mainMenuScreen::Screens& currentMainMenuScreen);
 	void init();
-	void deinit();
 }
 

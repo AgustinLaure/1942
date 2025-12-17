@@ -7,6 +7,22 @@
 
 namespace playing
 {
+	static const label::FontName scoreHUDFont = label::FontName::Militar;
+	static const Color scoreHUDColor = WHITE;
+
+	static const Vector2 scoreHUDPos = { screen::width - 200, screen::height - 100 };
+	static const std::string scoreHUDText = "Score: ";
+	static const int scoreHUDFontSize = 30;
+	static const int scoreHUDSpacing = 2;
+
+	static const label::FontName hpHUDFont = label::FontName::Militar;
+	static const Color hpHUDColor = WHITE;
+
+	static const Vector2 hpHUDPos = { 100, screen::height - 100 };
+	static const std::string hpHUDText = "HP: ";
+	static const int hpHUDFontSize = 30;
+	static const int hpHUDSpacing = 2;
+
 	const static KeyboardKey pauseKey = KEY_ESCAPE;
 
 	static Color backgroundColor = BLACK;
@@ -21,13 +37,16 @@ namespace playing
 		static player::Player player;
 		static enemyNormalPlane::EnemyNormalPlane enemyNormalPlanes[enemyNormalPlanePoolSize];
 
+		static label::Label scoreHUD;
+		static label::Label hpHUD;
+
 		static Music playingMusic;
 	}
 
 	namespace pause
 	{
 		//Title
-		static const std::string titleFontRoute = "res/fonts/militar_font.otf";
+		static const label::FontName titleFont = label::FontName::Militar;
 		static const Color titleColor = WHITE;
 
 		static const Vector2 titlePos = { screen::width / 2 - 100, 150 };
@@ -36,7 +55,7 @@ namespace playing
 		static const int titleSpacing = 2;
 
 		//AllButtons
-		static const std::string buttonFontRoute = "res/fonts/militar_font.otf";
+		static const label::FontName buttonFont = label::FontName::Militar;
 		static const Color buttonTextColor = WHITE;
 		static const Color buttonBoxColor = RED;
 
@@ -67,13 +86,12 @@ namespace playing
 		static void init();
 		static void update(gameScene::Scenes& currentGameScene);
 		static void draw();
-		static void deinit();
 	}
 
 	namespace lost
 	{
 		//Title
-		static const std::string titleFontRoute = "res/fonts/militar_font.otf";
+		static const label::FontName titleFont = label::FontName::Militar;
 		static const Color titleColor = WHITE;
 
 		static const Vector2 titlePos = { screen::width / 2 - 175, 100 };
@@ -81,8 +99,16 @@ namespace playing
 		static const int titleFontSize = 100;
 		static const int titleSpacing = 2;
 
+		static const label::FontName scoreFont = label::FontName::Militar;
+		static const Color scoreColor = WHITE;
+
+		static const Vector2 scorePos = { screen::width / 2 - 60, 325 };
+		static const std::string scoreText = "Score: ";
+		static const int scoreFontSize = 40;
+		static const int scoreSpacing = 2;
+
 		//AllButtons
-		static const std::string buttonFontRoute = "res/fonts/militar_font.otf";
+		static const label::FontName buttonFont = label::FontName::Militar;
 		static const Color buttonTextColor = WHITE;
 		static const Color buttonBoxColor = RED;
 
@@ -102,9 +128,13 @@ namespace playing
 		static const int menuFontSize = 60;
 		static const int menuSpacing = 2;
 
+		static const float lostMusicVolumeScale = 0.1f;
+		static const float lostMusicStart = 0.3f;
+
 		namespace objects
 		{
 			label::Label title;
+			label::Label score;
 
 			button::Button retry;
 			button::Button menu;
@@ -114,7 +144,7 @@ namespace playing
 
 		static void init();
 		static void update(gameScene::Scenes& currentGameScene);
-		static void draw();
+		static void draw(const float score);
 		static void deinit();
 	}
 
@@ -126,15 +156,16 @@ namespace playing
 	static void updateState();
 	static void reset();
 	static void backToMenu(gameScene::Scenes& currentGameScene);
+	static void drawHud();
 
 	namespace pause
 	{
 		static void init()
 		{
-			objects::title = label::init(titlePos, titleText, titleFontRoute, titleFontSize, titleSpacing, titleColor);
+			objects::title = label::init(titlePos, titleText, titleFont, titleFontSize, titleSpacing, titleColor);
 
-			objects::resume = button::init(resumeWidth, resumeHeight, resumePos, resumeText, buttonFontRoute, resumeFontSize, resumeSpacing, buttonTextColor, buttonBoxColor);
-			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFontRoute, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
+			objects::resume = button::init(resumeWidth, resumeHeight, resumePos, resumeText, buttonFont, resumeFontSize, resumeSpacing, buttonTextColor, buttonBoxColor);
+			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFont, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
 		}
 
 		static void update(gameScene::Scenes& currentGameScene)
@@ -160,27 +191,20 @@ namespace playing
 			button::draw(objects::resume);
 			button::draw(objects::menu);
 		}
-
-		static void deinit()
-		{
-			label::deinit(objects::title);
-
-			button::deinit(objects::resume);
-			button::deinit(objects::menu);
-		}
 	}
 
 	namespace lost
 	{
 		static void init()
 		{
-			objects::title = label::init(titlePos, titleText, titleFontRoute, titleFontSize, titleSpacing, titleColor);
+			objects::title = label::init(titlePos, titleText, titleFont, titleFontSize, titleSpacing, titleColor);
+			objects::score = label::init(scorePos, scoreText, scoreFont, scoreFontSize, scoreSpacing, scoreColor);
 
-			objects::retry = button::init(retryWidth, retryHeight, retryPos, retryText, buttonFontRoute, retryFontSize, retrySpacing, buttonTextColor, buttonBoxColor);
-			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFontRoute, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
+			objects::retry = button::init(retryWidth, retryHeight, retryPos, retryText, buttonFont, retryFontSize, retrySpacing, buttonTextColor, buttonBoxColor);
+			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFont, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
 
 			objects::lostMusic = LoadMusicStream("res/sounds/music/lost.ogg");
-			SetMusicVolume(objects::lostMusic, 0.1f);
+			SetMusicVolume(objects::lostMusic, lostMusicVolumeScale);
 			objects::lostMusic.looping = true;
 		}
 
@@ -189,7 +213,7 @@ namespace playing
 			if (!IsMusicStreamPlaying(objects::lostMusic))
 			{
 				PlayMusicStream(objects::lostMusic);
-				SeekMusicStream(objects::lostMusic, 3.f);
+				SeekMusicStream(objects::lostMusic, lostMusicStart);
 			}
 
 			button::update(objects::retry);
@@ -205,9 +229,12 @@ namespace playing
 			}
 		}
 
-		static void draw()
+		static void draw(const float score)
 		{
 			label::draw(objects::title);
+
+			objects::score.text = scoreText + std::to_string(static_cast<int>(score));
+			label::draw(objects::score);
 
 			button::draw(objects::retry);
 			button::draw(objects::menu);
@@ -215,11 +242,6 @@ namespace playing
 
 		static void deinit()
 		{
-			label::deinit(objects::title);
-
-			button::deinit(objects::retry);
-			button::deinit(objects::menu);
-
 			UnloadMusicStream(objects::lostMusic);
 		}
 	}
@@ -233,6 +255,9 @@ namespace playing
 	void init()
 	{
 		objects::player = player::init();
+
+		objects::hpHUD = label::init(hpHUDPos, hpHUDText, hpHUDFont, hpHUDFontSize, hpHUDSpacing, hpHUDColor);
+		objects::scoreHUD = label::init(scoreHUDPos, scoreHUDText, scoreHUDFont, scoreHUDFontSize, scoreHUDSpacing, scoreHUDColor);
 
 		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
 		{
@@ -251,14 +276,12 @@ namespace playing
 	{
 		UnloadMusicStream(objects::playingMusic);
 
-		pause::deinit();
 		lost::deinit();
-		player::deinit(objects::player);
-
-		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
-		{
-			enemyNormalPlane::deinit(objects::enemyNormalPlanes[i]);
-		}
+		player::deinit();
+		enemyNormalPlane::deinit();
+		bullet::deinit();
+		label::deinit();
+		button::deinit();
 	}
 
 	static void update(gameScene::Scenes& currentGameScene, const float deltaTime)
@@ -300,7 +323,11 @@ namespace playing
 
 		if (hasLost)
 		{
-			lost::draw();
+			lost::draw(objects::player.score);
+		}
+		else
+		{
+			drawHud();
 		}
 
 		if (isPaused)
@@ -364,6 +391,13 @@ namespace playing
 						{
 							enemyNormalPlane::onHit(*currentEnemyNormalPlane, currentBullet->damage);
 							bullet::onCollision(*currentBullet);
+
+							player::scoreAddHit(objects::player);
+
+							if (!currentEnemyNormalPlane->isAlive)
+							{
+								player::scoreAddKill(objects::player);
+							}
 						}
 					}
 				}
@@ -374,6 +408,11 @@ namespace playing
 				{
 					player::onCrash(objects::player);
 					enemyNormalPlane::onCrash(*currentEnemyNormalPlane);
+
+					if (!currentEnemyNormalPlane->isAlive)
+					{
+						player::scoreAddKill(objects::player);
+					}
 				}
 			}
 		}
@@ -403,6 +442,8 @@ namespace playing
 		StopMusicStream(objects::playingMusic);
 		StopMusicStream(lost::objects::lostMusic);
 
+		enemySpawner::reset();
+
 		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
 		{
 			objects::enemyNormalPlanes[i] = enemyNormalPlane::init();
@@ -413,5 +454,14 @@ namespace playing
 	{
 		currentGameScene = gameScene::Scenes::MainMenu;
 		reset();
+	}
+
+	static void drawHud()
+	{
+		objects::hpHUD.text = hpHUDText + std::to_string(static_cast<int>(objects::player.hp));
+		objects::scoreHUD.text = scoreHUDText + std::to_string(static_cast<int>(objects::player.score));
+
+		label::draw(objects::hpHUD);
+		label::draw(objects::scoreHUD);
 	}
 }
