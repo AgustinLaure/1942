@@ -1,9 +1,7 @@
 #include "game.h"
 
-#include "raylib.h"
-
-#include "screen.h"
 #include "player.h"
+#include "screen.h"
 
 namespace game
 {

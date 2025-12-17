@@ -1,6 +1,6 @@
 #include "vector.h"
 
-#include <math.h>
+#include "raymath.h"
 
 namespace vector
 {

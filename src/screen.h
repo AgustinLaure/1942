@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "vector.h"
 
 namespace screen
