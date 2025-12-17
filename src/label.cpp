@@ -2,13 +2,13 @@
 
 namespace label
 {
-	Label init(const Vector2 pos, const std::string text, const Font font, const float fontSize, const float spacing, const Color color)
+	Label init(const Vector2 pos, const std::string text, const std::string fontRoute, const float fontSize, const float spacing, const Color color)
 	{
 		Label newLabel;
 
 		newLabel.pos = pos;
 		newLabel.text = text;
-		newLabel.font = font;
+		newLabel.font = LoadFont(fontRoute.c_str());
 		newLabel.fontSize = fontSize;
 		newLabel.spacing = spacing;
 		newLabel.color = color;
@@ -19,5 +19,10 @@ namespace label
 	void draw(const Label label)
 	{
 		DrawTextEx(GetFontDefault(), label.text.c_str(), label.pos, label.fontSize, label.spacing, label.color);
+	}
+
+	void deinit(Label& label)
+	{
+		UnloadFont(label.font);
 	}
 }

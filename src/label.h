@@ -16,7 +16,8 @@ namespace label
 		Color color = WHITE;
 	};
 
-	Label init(const Vector2 pos, const std::string text, const Font font, const float fontSize, const float spacing, const Color color);
+	Label init(const Vector2 pos, const std::string text, const std::string fontRoute, const float fontSize, const float spacing, const Color color);
 	void draw(const Label label);
+	void deinit(Label& label);
 }
 

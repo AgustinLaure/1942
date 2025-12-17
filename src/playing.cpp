@@ -16,15 +16,15 @@ namespace playing
 		static enemyNormalPlane::EnemyNormalPlane enemyNormalPlanes[enemyNormalPlanePoolSize];
 	}
 
-	static void update(const float deltaTime);
+	static void update(gameScene::Scenes& currentGameScene, const float deltaTime);
 	static void draw();
 	static void updateEnemies(const player::Player player, const float deltaTime);
 	static void drawEnemies();
 	static void handleCollisions();
 
-	void playing(const float deltaTime)
+	void playing(gameScene::Scenes& currentGameScene, const float deltaTime)
 	{
-		update(deltaTime);
+		update(currentGameScene, deltaTime);
 		draw();
 	}
 
@@ -36,8 +36,6 @@ namespace playing
 		{
 			objects::enemyNormalPlanes[i] = enemyNormalPlane::init();
 		}
-
-		screen::openWindow();
 	}
 
 	void deinit()
@@ -45,12 +43,14 @@ namespace playing
 
 	}
 
-	static void update(const float deltaTime)
+	static void update(gameScene::Scenes& currentGameScene, const float deltaTime)
 	{
 		player::update(objects::player, deltaTime);
 		enemySpawner::update(objects::enemyNormalPlanes, enemyNormalPlanePoolSize, deltaTime);
 		updateEnemies(objects::player, deltaTime);
 		handleCollisions();
+
+		currentGameScene;
 	}
 
 	static void draw()

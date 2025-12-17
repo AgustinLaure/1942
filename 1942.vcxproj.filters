@@ -55,6 +55,18 @@
     <Filter Include="src\game\scenes\main_menu">
       <UniqueIdentifier>{50b501eb-62e2-4610-a4c8-3fe3ddf2b52b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\scenes\main_menu\screens">
+      <UniqueIdentifier>{fbc05cf5-4b9f-4255-898e-0ee4b71cefa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\main_menu\screens\main_menu">
+      <UniqueIdentifier>{1759ad26-ddfd-4327-8176-292449deed87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\main_menu\screens\rules">
+      <UniqueIdentifier>{3f363736-8a14-4338-b134-dc1542b3dc7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\main_menu\screens\credits">
+      <UniqueIdentifier>{2e6a06a1-6981-45df-95e0-05a812664bc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">

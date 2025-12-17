@@ -5,6 +5,7 @@ namespace gameScene
 	enum class Scenes
 	{
 		Playing,
-		MainMenu
+		MainMenu,
+		Exit
 	};
 }

@@ -4,7 +4,7 @@
 
 namespace mainMenu
 {
-	void mainMenu(gameScene::Scenes* currentGameScene);
+	void mainMenu(gameScene::Scenes& currentGameScene);
 	void init();
 	void deinit();
 }

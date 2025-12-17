@@ -10,7 +10,7 @@ namespace game
 	static bool isRunning = true;
 	static float deltaTime = 0.f;
 
-	static gameScene::Scenes currentScene = gameScene::Scenes::Playing;
+	static gameScene::Scenes currentScene = gameScene::Scenes::MainMenu;
 
 	static void game();
 	static void init();
@@ -33,23 +33,27 @@ namespace game
 
 	static void init()
 	{
+		screen::openWindow();
+		InitAudioDevice();
+
 		playing::init();
 		mainMenu::init();
 	}
 
 	static void loop()
 	{
-		while (!WindowShouldClose() && isRunning)
+		while (!WindowShouldClose() && currentScene != gameScene::Scenes::Exit)
 		{
 			deltaTime = GetFrameTime();
 
 			switch (currentScene)
 			{
 			case gameScene::Scenes::Playing:
-				playing::playing(deltaTime);
+				playing::playing(currentScene, deltaTime);
 				break;
 
 			case gameScene::Scenes::MainMenu:
+				mainMenu::mainMenu(currentScene);
 				break;
 
 			default:
@@ -57,12 +61,13 @@ namespace game
 			}
 		}
 	}
-	
+
 	static void deinit()
 	{
 		playing::deinit();
 		mainMenu::deinit();
 
+		CloseAudioDevice();
 		screen::closeWindow();
 	}
 }
