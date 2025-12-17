@@ -4,8 +4,6 @@
 
 namespace screen
 {
-	static const int width = 1040;
-	static const int height = 720;
 	static const std::string name = "1942";
 
 	void openWindow()

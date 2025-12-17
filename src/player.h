@@ -7,7 +7,7 @@ namespace player
 	static const int maxBulletsPool = 50;
 	struct Player
 	{
-		shape::Rectangle hitBox;
+		shape::Rectangle hitBox = {};
 
 		Vector2 dir = {};
 		float speed = 0.f;
@@ -17,7 +17,7 @@ namespace player
 		bullet::Bullet bullets[maxBulletsPool];
 		float shootCooldown = 0.f;
 
-		Color color;
+		Color color = WHITE;
 	};
 
 	Player init();

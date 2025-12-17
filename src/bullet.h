@@ -8,11 +8,11 @@ namespace bullet
 {
 	struct Bullet
 	{
-		bool isAlive;
-		shape::Rectangle hitBox;
-		Vector2 dir;
-		float speed;
-		Color color;
+		bool isAlive = false;
+		shape::Rectangle hitBox = {};
+		Vector2 dir = {};
+		float speed = 0.F;
+		Color color = WHITE;
 	};
 
 	enum class BulletType

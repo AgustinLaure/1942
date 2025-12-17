@@ -31,6 +31,12 @@
     <Filter Include="src\game\entitites\bullet">
       <UniqueIdentifier>{b80a41d2-18b9-48d9-8145-e93a5d139d48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\entitites\enemies">
+      <UniqueIdentifier>{c130a6dd-d53b-457b-bc7c-9fd633962dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\entitites\enemies\normal_plane">
+      <UniqueIdentifier>{de71ea97-a0fe-48b2-955b-e2d0c06a9411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -54,6 +60,9 @@
     <ClCompile Include="src\bullet.cpp">
       <Filter>src\game\entitites\bullet</Filter>
     </ClCompile>
+    <ClCompile Include="src\enemy_normal_plane.cpp">
+      <Filter>src\game\entitites\enemies\normal_plane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -73,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="src\bullet.h">
       <Filter>src\game\entitites\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy_normal_plane.h">
+      <Filter>src\game\entitites\enemies\normal_plane</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

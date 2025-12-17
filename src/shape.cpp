@@ -2,7 +2,7 @@
 
 namespace shape
 {
-	Rectangle init(const float width, const float height, const Vector2 pos)
+	Rectangle initRectangle(const float width, const float height, const Vector2 pos)
 	{
 		Rectangle newRect;
 
@@ -13,12 +13,17 @@ namespace shape
 		return newRect;
 	}
 
-	bool isRectOnRect(const Vector2 rect1Pos, const int rect1Width, const int rect1Height, const Vector2 rect2Pos, const int rect2Width, const int rect2Height)
+	Vector2 getRectangleCenter(const Rectangle rectangle)
 	{
-		return (rect1Pos.x <= rect2Pos.x + rect2Width
-			&& rect1Pos.x + rect1Width >= rect2Pos.x
-			&& rect1Pos.y <= rect2Pos.y + rect2Height
-			&& rect1Pos.y + rect1Height >= rect2Pos.y);
+		return { rectangle.pos.x + rectangle.width / 2, rectangle.pos.y + rectangle.height / 2 };
+	}
+
+	bool isRectOnRect(const Rectangle rect1, const Rectangle rect2)
+	{
+		return (rect1.pos.x <= rect2.pos.x + rect2.width
+			&& rect1.pos.x + rect1.width >= rect2.pos.x
+			&& rect1.pos.y <= rect2.pos.y + rect2.height
+			&& rect1.pos.y + rect1.height >= rect2.pos.y);
 	}
 
 	bool isPointCollidingRect(const Vector2 p, const Rectangle rect)

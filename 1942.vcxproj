@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\bullet.cpp" />
+    <ClCompile Include="src\enemy_normal_plane.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\player.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\bullet.h" />
+    <ClInclude Include="src\enemy_normal_plane.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\screen.h" />

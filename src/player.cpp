@@ -7,7 +7,7 @@
 namespace player
 {
 	//InitialConfig
-	static const shape::Rectangle constHitBoxShape = shape::init(50, 101, { 0,0 });
+	static const shape::Rectangle constHitBoxShape = shape::initRectangle(50, 101, { 0,0 });
 	static const Vector2 constBulletSpawnOffset = { constHitBoxShape.width / 2, -10.f };
 	static const float constShootCooldown = 0.5f;
 

@@ -1,0 +1,139 @@
+#include "enemy_normal_plane.h"
+
+#include "raymath.h"
+
+#include "screen.h"
+
+namespace enemyNormalPlane
+{
+	//Config
+	static const float constHeight = 30.f;
+	static const float constBulletSpawnOffset = 10.f;
+
+	static const float constInitialSpeed = 400.f;
+	static const float constInitialDamage = 1.f;
+	static const float constInitialHp = 2.f;
+	static const Color constInitialColor = RED;
+	static const float constInitialShootcooldown = 0.5f;
+	static const float constInitialShootPrecision = 1.f; //Degrees
+
+	EnemyNormalPlane init()
+	{
+		EnemyNormalPlane newPlane;
+
+		newPlane.isAlive = false;
+
+		newPlane.hitBox = shape::initRectangle(constWidth, constHeight, { 0.f,0.f });
+		newPlane.dir = { 0.f, 0.f };
+		newPlane.speed = constInitialSpeed;
+		newPlane.damage = constInitialDamage;
+		newPlane.hp = constInitialHp;
+
+		for (int i = 0; i < maxBulletsPool; i++)
+		{
+			newPlane.bullets[i] = bullet::init(bullet::bulletPresets[static_cast<int>(bullet::BulletType::Normal)], { 0.f,0.f });
+		}
+
+		newPlane.shootCooldown = 0.f;
+
+		newPlane.color = constInitialColor;
+
+		return newPlane;
+	}
+
+	static void updateBullets(bullet::Bullet bullets[], const float deltaTime);
+	static void drawBullets(bullet::Bullet bullets[]);
+	static void shoot(EnemyNormalPlane& plane, const player::Player player);
+	static void move(EnemyNormalPlane& plane, const float deltaTime);
+	static Vector2 getShootDir(EnemyNormalPlane& plane, const Vector2 playerCenter);
+	static void outScreen(EnemyNormalPlane& plane);
+
+	void update(EnemyNormalPlane& plane, const player::Player player, const float deltaTime)
+	{
+		plane.shootCooldown -= deltaTime;
+
+		move(plane, deltaTime);
+		shoot(plane, player);
+
+		updateBullets(plane.bullets, deltaTime);
+
+		outScreen(plane);
+	}
+
+	void draw(EnemyNormalPlane& plane)
+	{
+		drawBullets(plane.bullets);
+
+		DrawRectangle(static_cast<int>(plane.hitBox.pos.x), static_cast<int>(plane.hitBox.pos.y), static_cast<int>(plane.hitBox.width), static_cast<int>(plane.hitBox.height), plane.color);
+	}
+
+	void launch(EnemyNormalPlane& plane, const Vector2 pos, const Vector2 dir)
+	{
+		plane.hitBox.pos = pos;
+		plane.dir = dir;
+		plane.isAlive = true;
+	}
+
+	static void updateBullets(bullet::Bullet bullets[], const float delta)
+	{
+		for (int i = 0; i < maxBulletsPool; i++)
+		{
+			if (bullets[i].isAlive)
+			{
+				bullet::update(bullets[i], delta);
+			}
+		}
+	}
+
+	static void drawBullets(bullet::Bullet bullets[])
+	{
+		for (int i = 0; i < maxBulletsPool; i++)
+		{
+			if (bullets[i].isAlive)
+			{
+				bullet::draw(bullets[i]);
+			}
+		}
+	}
+
+	static void shoot(EnemyNormalPlane& plane, const player::Player player)
+	{
+		if (plane.shootCooldown < EPSILON)
+		{
+			for (int i = 0; i < maxBulletsPool; i++)
+			{
+				if (!plane.bullets[i].isAlive)
+				{
+					Vector2 shootDir = getShootDir(plane, shape::getRectangleCenter(player.hitBox));
+
+					bullet::shoot(plane.bullets[i], shape::getRectangleCenter(plane.hitBox) + shootDir * constBulletSpawnOffset, shootDir);
+					plane.shootCooldown = constInitialShootcooldown;
+
+					return;
+				}
+			}
+		}
+	}
+
+	static void move(EnemyNormalPlane& plane, const float delta)
+	{
+		plane.hitBox.pos += plane.dir * plane.speed * delta;
+	}
+
+	static Vector2 getShootDir(EnemyNormalPlane& plane, const Vector2 playerCenter)
+	{
+		float targetDegree = vector::getDegreeFromTwoPoints(plane.hitBox.pos, playerCenter);
+
+		targetDegree = static_cast<float>(GetRandomValue(static_cast<int>(targetDegree-constInitialShootPrecision), static_cast<int>(targetDegree + constInitialShootPrecision)));
+
+		return vector::getDegreeToVector2(targetDegree);
+	}
+
+	static void outScreen(EnemyNormalPlane& plane)
+	{
+		if (screen::isPointOutScreen(shape::getRectangleCenter(plane.hitBox)))
+		{
+			plane.isAlive = false;
+		}
+	}
+}
