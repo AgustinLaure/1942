@@ -92,10 +92,6 @@ namespace player
 
 	void deinit()
 	{
-		//for (int i = 0; i < maxBulletsPool; i++)
-		//{
-		//	bullet::deinit(player.bullets[i]);
-		//}
 		UnloadTexture(Player::sprite);
 		UnloadSound(Player::lowHpSound);
 		UnloadSound(Player::explosion);
@@ -118,7 +114,6 @@ namespace player
 	void draw(Player player)
 	{
 		drawBullets(player.bullets);
-		DrawRectangle(static_cast<int>(player.hitBox.pos.x), static_cast<int>(player.hitBox.pos.y), static_cast<int>(player.hitBox.width), static_cast<int>(player.hitBox.height), player.color);
 
 		renderer::drawSprite(player.sprite, player.hitBox, WHITE);
 	}

@@ -98,7 +98,6 @@ namespace enemyNormalPlane
 
 		if (plane.isAlive)
 		{
-			DrawRectangle(static_cast<int>(plane.hitBox.pos.x), static_cast<int>(plane.hitBox.pos.y), static_cast<int>(plane.hitBox.width), static_cast<int>(plane.hitBox.height), plane.color);
 			renderer::drawSprite(plane.sprite, plane.hitBox, plane.color);
 		}
 	}

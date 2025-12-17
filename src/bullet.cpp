@@ -68,7 +68,6 @@ namespace bullet
 	{
 		if (bullet.isAlive)
 		{
-			DrawRectangle(static_cast<int>(bullet.hitBox.pos.x), static_cast<int>(bullet.hitBox.pos.y), static_cast<int>(bullet.hitBox.width), static_cast<int>(bullet.hitBox.height), bullet.color);
 			renderer::drawSprite(bullet.sprite, bullet.hitBox, bullet.color);
 		}
 	}

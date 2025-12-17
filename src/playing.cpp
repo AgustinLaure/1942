@@ -25,7 +25,7 @@ namespace playing
 
 	const static KeyboardKey pauseKey = KEY_ESCAPE;
 
-	static Color backgroundColor = BLACK;
+	static Color backgroundColor = BLUE;
 
 	static bool isPaused = false;
 	static bool hasLost = false;
