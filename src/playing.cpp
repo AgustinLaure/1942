@@ -6,7 +6,7 @@
 #include "screen.h"
 
 namespace playing
-{ 
+{
 	const static KeyboardKey pauseKey = KEY_ESCAPE;
 
 	static Color backgroundColor = BLACK;
@@ -20,6 +20,8 @@ namespace playing
 	{
 		static player::Player player;
 		static enemyNormalPlane::EnemyNormalPlane enemyNormalPlanes[enemyNormalPlanePoolSize];
+
+		static Music playingMusic;
 	}
 
 	namespace pause
@@ -28,7 +30,7 @@ namespace playing
 		static const std::string titleFontRoute = "res/fonts/militar_font.otf";
 		static const Color titleColor = WHITE;
 
-		static const Vector2 titlePos = { screen::width/2 - 100, 150 };
+		static const Vector2 titlePos = { screen::width / 2 - 100, 150 };
 		static const std::string titleText = "Pause";
 		static const int titleFontSize = 100;
 		static const int titleSpacing = 2;
@@ -74,7 +76,7 @@ namespace playing
 		static const std::string titleFontRoute = "res/fonts/militar_font.otf";
 		static const Color titleColor = WHITE;
 
-		static const Vector2 titlePos = { screen::width / 2 - 185, 100 };
+		static const Vector2 titlePos = { screen::width / 2 - 175, 100 };
 		static const std::string titleText = "You lost!";
 		static const int titleFontSize = 100;
 		static const int titleSpacing = 2;
@@ -106,6 +108,8 @@ namespace playing
 
 			button::Button retry;
 			button::Button menu;
+
+			static Music lostMusic;
 		}
 
 		static void init();
@@ -121,15 +125,16 @@ namespace playing
 	static void handleCollisions();
 	static void updateState();
 	static void reset();
+	static void backToMenu(gameScene::Scenes& currentGameScene);
 
 	namespace pause
 	{
 		static void init()
 		{
-			objects::title = label::init(titlePos,titleText,titleFontRoute,titleFontSize,titleSpacing,titleColor);
+			objects::title = label::init(titlePos, titleText, titleFontRoute, titleFontSize, titleSpacing, titleColor);
 
-			objects::resume = button::init(resumeWidth, resumeHeight, resumePos,resumeText,buttonFontRoute,resumeFontSize,resumeSpacing,buttonTextColor,buttonBoxColor);
-			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText,buttonFontRoute, menuFontSize, menuSpacing,buttonTextColor,buttonBoxColor);
+			objects::resume = button::init(resumeWidth, resumeHeight, resumePos, resumeText, buttonFontRoute, resumeFontSize, resumeSpacing, buttonTextColor, buttonBoxColor);
+			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFontRoute, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
 		}
 
 		static void update(gameScene::Scenes& currentGameScene)
@@ -144,9 +149,7 @@ namespace playing
 
 			if (objects::menu.isPressed)
 			{
-				currentGameScene = gameScene::Scenes::MainMenu;
-				
-				reset();
+				backToMenu(currentGameScene);
 			}
 		}
 
@@ -171,14 +174,23 @@ namespace playing
 	{
 		static void init()
 		{
-			objects::title = label::init(titlePos,titleText,titleFontRoute,titleFontSize,titleSpacing,titleColor);
+			objects::title = label::init(titlePos, titleText, titleFontRoute, titleFontSize, titleSpacing, titleColor);
 
-			objects::retry = button::init(retryWidth, retryHeight, retryPos, retryText,buttonFontRoute, retryFontSize, retrySpacing,buttonTextColor,buttonBoxColor);
-			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText,buttonFontRoute, menuFontSize, menuSpacing,buttonTextColor,buttonBoxColor);
+			objects::retry = button::init(retryWidth, retryHeight, retryPos, retryText, buttonFontRoute, retryFontSize, retrySpacing, buttonTextColor, buttonBoxColor);
+			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFontRoute, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
+
+			objects::lostMusic = LoadMusicStream("res/sound/music/lost.ogg");
+			SetMusicVolume(objects::lostMusic, 0.1f);
+			objects::lostMusic.looping = true;
 		}
 
 		static void update(gameScene::Scenes& currentGameScene)
 		{
+			if (!IsMusicStreamPlaying(objects::lostMusic))
+			{
+				PlayMusicStream(objects::lostMusic);
+			}
+
 			button::update(objects::retry);
 			button::update(objects::menu);
 
@@ -188,8 +200,7 @@ namespace playing
 			}
 			if (objects::menu.isPressed)
 			{
-				reset();
-				currentGameScene = gameScene::Scenes::MainMenu;
+				backToMenu(currentGameScene);
 			}
 		}
 
@@ -207,6 +218,8 @@ namespace playing
 
 			button::deinit(objects::retry);
 			button::deinit(objects::menu);
+
+			UnloadMusicStream(objects::lostMusic);
 		}
 	}
 
@@ -225,18 +238,29 @@ namespace playing
 			objects::enemyNormalPlanes[i] = enemyNormalPlane::init();
 		}
 
+		objects::playingMusic = LoadMusicStream("res/sound/music/playing.ogg");
+		SetMusicVolume(objects::playingMusic, 0.1f);
+		objects::playingMusic.looping = true;
+
 		pause::init();
 		lost::init();
 	}
 
 	void deinit()
 	{
+		UnloadMusicStream(objects::playingMusic);
+
 		pause::deinit();
 		lost::deinit();
 	}
 
 	static void update(gameScene::Scenes& currentGameScene, const float deltaTime)
 	{
+		if (!IsMusicStreamPlaying(objects::playingMusic))
+		{
+			PlayMusicStream(objects::playingMusic);
+		}
+
 		updateState();
 
 		if (!isPaused && !hasLost)
@@ -249,13 +273,14 @@ namespace playing
 		else if (hasLost)
 		{
 			lost::update(currentGameScene);
+			UpdateMusicStream(lost::objects::lostMusic);
 		}
 		else if (isPaused)
 		{
 			pause::update(currentGameScene);
 		}
 
-		currentGameScene;
+		UpdateMusicStream(objects::playingMusic);
 	}
 
 	static void draw()
@@ -349,7 +374,7 @@ namespace playing
 
 	static void updateState()
 	{
-		if (IsKeyPressed(pauseKey))
+		if (IsKeyPressed(pauseKey) && !hasLost)
 		{
 			isPaused = !isPaused;
 		}
@@ -357,6 +382,7 @@ namespace playing
 		if (!objects::player.isAlive)
 		{
 			hasLost = true;
+			PauseMusicStream(objects::playingMusic);
 		}
 	}
 
@@ -364,12 +390,21 @@ namespace playing
 	{
 		isPaused = false;
 		hasLost = false;
-		
+
 		objects::player = player::init();
+
+		StopMusicStream(objects::playingMusic);
+		StopMusicStream(lost::objects::lostMusic);
 
 		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
 		{
 			objects::enemyNormalPlanes[i] = enemyNormalPlane::init();
 		}
+	}
+
+	static void backToMenu(gameScene::Scenes& currentGameScene)
+	{
+		currentGameScene = gameScene::Scenes::MainMenu;
+		reset();
 	}
 }

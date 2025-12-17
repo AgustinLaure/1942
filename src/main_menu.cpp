@@ -10,8 +10,20 @@ namespace mainMenu
 {
 	static mainMenuScreen::Screens currentScreen = mainMenuScreen::Screens::Title;
 
+	namespace objects
+	{
+		Music menuMusic;
+	}
+
 	void mainMenu(gameScene::Scenes& currentGameScene)
 	{
+		if (!IsMusicStreamPlaying(objects::menuMusic))
+		{
+			PlayMusicStream(objects::menuMusic);
+		}
+
+		UpdateMusicStream(objects::menuMusic);
+
 		switch (currentScreen)
 		{
 		case mainMenuScreen::Screens::Title:
@@ -33,6 +45,10 @@ namespace mainMenu
 
 	void init()
 	{
+		objects::menuMusic = LoadMusicStream("res/sound/music/menu.ogg");
+		SetMusicVolume(objects::menuMusic, 0.1f);
+		objects::menuMusic.looping = true;
+
 		titleScreen::init();
 		rulesScreen::init();
 		creditsScreen::init();
@@ -40,6 +56,8 @@ namespace mainMenu
 
 	void deinit()
 	{
+		UnloadMusicStream(objects::menuMusic);
+
 		titleScreen::deinit();
 		rulesScreen::deinit();
 		creditsScreen::deinit();

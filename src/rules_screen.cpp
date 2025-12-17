@@ -26,7 +26,7 @@ namespace rulesScreen
 	static const int rules3Spacing = 2;
 
 	static const Vector2 rules4Pos = { 100, 400 };
-	static const std::string rules4Text = "-P pause";
+	static const std::string rules4Text = "-ESCAPE pause";
 	static const int rules4FontSize = 40;
 	static const int rules4Spacing = 2;
 
