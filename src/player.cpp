@@ -14,7 +14,7 @@ namespace player
 	static const Vector2 constShootDir = { 0,-1 };
 	static const float constInitialSpeed = 500.f;
 	static const float constInitialDamage = 1.f;
-	static const float constInitialHp = 3.f;
+	static const float constInitialHp = 1.f;
 	static const Color constInitialColor = WHITE;
 	static const float constInitialCrashDamage = 2.f;
 

@@ -36,6 +36,8 @@ namespace game
 		screen::openWindow();
 		InitAudioDevice();
 
+		SetExitKey(KEY_NULL);
+
 		playing::init();
 		mainMenu::init();
 	}

@@ -6,7 +6,7 @@ const float EPSILON = 0.00001f;
 
 namespace enemySpawner
 {
-	static const float constInitialEnemySpawnCooldown = 3.f;
+	static const float constInitialEnemySpawnCooldown = 0.5f;
 	static float enemySpawnCooldown = constInitialEnemySpawnCooldown;
 
 	static const Vector2 constEnemyDir = { 0.f, 1.f };

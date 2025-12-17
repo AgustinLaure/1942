@@ -33,7 +33,7 @@ namespace button
 	{
 		button.isPressed = false;
 
-		if (IsMouseButtonDown(actionButton))
+		if (IsMouseButtonPressed(actionButton))
 		{
 			if (shape::isPointCollidingRect(GetMousePosition(), button.body))
 			{
