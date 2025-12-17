@@ -11,12 +11,12 @@ namespace rulesScreen
 	static const Color rulesColor = WHITE;
 
 	static const Vector2 rules1Pos = {100, 100};
-	static const std::string rules1Text = "-Dodge and shoot down as many planes as you can";
+	static const std::string rules1Text = "-Dodge and shoot down as many planes as possible";
 	static const int rules1FontSize = 38;
 	static const int rules1Spacing = 2;
 
 	static const Vector2 rules2Pos = { 100, 200 };
-	static const std::string rules2Text = "-WASD move in all direction";
+	static const std::string rules2Text = "-WASD move in all directions";
 	static const int rules2FontSize = 40;
 	static const int rules2Spacing = 2;
 

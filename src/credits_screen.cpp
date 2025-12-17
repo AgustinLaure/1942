@@ -16,14 +16,19 @@ namespace creditsScreen
 	static const int credits1Spacing = 2;
 
 	static const Vector2 credits2Pos = { 100, 200 };
-	static const std::string credits2Text = "asd";
+	static const std::string credits2Text = "sir-raitan - itchio";
 	static const int credits2FontSize = 55;
 	static const int credits2Spacing = 2;
 
 	static const Vector2 credits3Pos = { 100, 300 };
-	static const std::string credits3Text = "das";
+	static const std::string credits3Text = "ansimuz - itchio";
 	static const int credits3FontSize = 55;
 	static const int credits3Spacing = 2;
+
+	static const Vector2 credits4Pos = { 100, 400 };
+	static const std::string credits4Text = "ef9 - itchio";
+	static const int credits4FontSize = 55;
+	static const int credits4Spacing = 2;
 
 	//AllButtons
 	static const label::FontName buttonFont= label::FontName::Militar;
@@ -43,6 +48,7 @@ namespace creditsScreen
 		static label::Label credits1;
 		static label::Label credits2;
 		static label::Label credits3;
+		static label::Label credits4;
 
 		static button::Button backButton;
 	}
@@ -61,6 +67,7 @@ namespace creditsScreen
 		objects::credits1 = label::init(credits1Pos, credits1Text, creditFont, credits1FontSize, credits1Spacing, creditsColor);
 		objects::credits2 = label::init(credits2Pos, credits2Text, creditFont, credits2FontSize, credits2Spacing, creditsColor);
 		objects::credits3 = label::init(credits3Pos, credits3Text, creditFont, credits3FontSize, credits3Spacing, creditsColor);
+		objects::credits4 = label::init(credits4Pos, credits4Text, creditFont, credits4FontSize, credits4Spacing, creditsColor);
 
 		objects::backButton = button::init(backWidth, backHeight, backPos, backText, buttonFont, backFontSize, backSpacing, buttonTextColor, buttonBoxColor);
 	}
@@ -83,6 +90,7 @@ namespace creditsScreen
 		label::draw(objects::credits1);
 		label::draw(objects::credits2);
 		label::draw(objects::credits3);
+		label::draw(objects::credits4);
 
 		button::draw(objects::backButton);
 

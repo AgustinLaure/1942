@@ -32,7 +32,7 @@ namespace player
 
 	static const float constInitialSpeed = 500.f;
 	static const float constInitialDamage = 1.f;
-	static const float constInitialHp = 1.f;
+	static const float constInitialHp = 100.f;
 	static const Color constInitialColor = WHITE;
 	static const float constInitialCrashDamage = 2.f;
 
