@@ -27,10 +27,7 @@ namespace game
 	static void deinit();
 	static void updateEnemies(const player::Player player);
 	static void drawEnemies();
-
-	static void spawnEnemy();
-	static void launchEnemyNormalPlane(const Vector2 chosenPos);
-	static Vector2 getEnemySpawnPos(const float planeWidth);
+	static void handleCollisions();
 
 	void runGame()
 	{
@@ -71,10 +68,9 @@ namespace game
 	static void update()
 	{
 		player::update(objects::player, deltaTime);
-
 		enemySpawner::update(objects::enemyNormalPlanes, enemyNormalPlanePoolSize, deltaTime);
-
 		updateEnemies(objects::player);
+		handleCollisions();
 	}
 
 	static void draw()
@@ -84,7 +80,7 @@ namespace game
 
 		player::draw(objects::player);
 		drawEnemies();
-		
+
 		EndDrawing();
 	}
 
@@ -97,10 +93,7 @@ namespace game
 	{
 		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
 		{
-			if (objects::enemyNormalPlanes[i].isAlive)
-			{
-				enemyNormalPlane::update(objects::enemyNormalPlanes[i], player, deltaTime);
-			}
+			enemyNormalPlane::update(objects::enemyNormalPlanes[i], player, deltaTime);
 		}
 	}
 
@@ -108,9 +101,58 @@ namespace game
 	{
 		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
 		{
-			if (objects::enemyNormalPlanes[i].isAlive)
+			enemyNormalPlane::draw(objects::enemyNormalPlanes[i]);
+		}
+	}
+
+	static void handleCollisions()
+	{
+		//Player bullets to enemy
+
+		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
+		{
+			enemyNormalPlane::EnemyNormalPlane* currentEnemyNormalPlane = &objects::enemyNormalPlanes[i];
+
+			//Self bullets to player
+			for (int j = 0; j < enemyNormalPlane::maxBulletsPool; j++)
 			{
-				enemyNormalPlane::draw(objects::enemyNormalPlanes[i]);
+				bullet::Bullet* currentBullet = &currentEnemyNormalPlane->bullets[j];
+
+				if (currentBullet->isAlive)
+				{
+					if (shape::isRectOnRect(objects::player.hitBox, currentBullet->hitBox))
+					{
+						player::onHit(objects::player, currentBullet->damage);
+						bullet::onCollision(*currentBullet);
+					}
+				}
+			}
+
+			if (currentEnemyNormalPlane->isAlive)
+			{
+				//Self to player bullets
+
+				for (int j = 0; j < player::maxBulletsPool; j++)
+				{
+					bullet::Bullet* currentBullet = &objects::player.bullets[j];
+
+					if (currentBullet->isAlive)
+					{
+						if (shape::isRectOnRect(currentEnemyNormalPlane->hitBox, currentBullet->hitBox))
+						{
+							enemyNormalPlane::onHit(*currentEnemyNormalPlane, currentBullet->damage);
+							bullet::onCollision(*currentBullet);
+						}
+					}
+				}
+
+				//Self to player
+
+				if (shape::isRectOnRect(currentEnemyNormalPlane->hitBox, objects::player.hitBox))
+				{
+					player::onCrash(objects::player);
+					enemyNormalPlane::onCrash(*currentEnemyNormalPlane);
+				}
 			}
 		}
 	}

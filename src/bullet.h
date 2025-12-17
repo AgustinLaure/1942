@@ -11,7 +11,8 @@ namespace bullet
 		bool isAlive = false;
 		shape::Rectangle hitBox = {};
 		Vector2 dir = {};
-		float speed = 0.F;
+		float speed = 0.f;
+		float damage = 0.f;
 		Color color = WHITE;
 	};
 
@@ -24,6 +25,7 @@ namespace bullet
 	{
 		shape::Rectangle hitBox;
 		float speed;
+		float damage;
 		Color color;
 	};
 
@@ -38,6 +40,7 @@ namespace bullet
 			{0.f,0.f}	//Pos
 		},
 		650.f,			//Speed
+		1.f,
 		WHITE			//Color
 		}
 	};

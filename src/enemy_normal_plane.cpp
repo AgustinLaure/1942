@@ -10,12 +10,13 @@ namespace enemyNormalPlane
 	static const float constHeight = 30.f;
 	static const float constBulletSpawnOffset = 10.f;
 
-	static const float constInitialSpeed = 400.f;
+	static const float constInitialSpeed = 200.f;
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 2.f;
 	static const Color constInitialColor = RED;
 	static const float constInitialShootcooldown = 0.5f;
-	static const float constInitialShootPrecision = 1.f; //Degrees
+	static const float constInitialShootImprecision = 1.f; //Degrees
+	static const float constInitialCrashDamage = 3.f;
 
 	EnemyNormalPlane init()
 	{
@@ -47,31 +48,51 @@ namespace enemyNormalPlane
 	static void move(EnemyNormalPlane& plane, const float deltaTime);
 	static Vector2 getShootDir(EnemyNormalPlane& plane, const Vector2 playerCenter);
 	static void outScreen(EnemyNormalPlane& plane);
+	static void takeDamage(EnemyNormalPlane& plane, const float damage);
+	static void die(EnemyNormalPlane& plane);
 
 	void update(EnemyNormalPlane& plane, const player::Player player, const float deltaTime)
 	{
-		plane.shootCooldown -= deltaTime;
+		if (plane.isAlive)
+		{
 
-		move(plane, deltaTime);
-		shoot(plane, player);
+			plane.shootCooldown -= deltaTime;
+
+			move(plane, deltaTime);
+			shoot(plane, player);
+
+			outScreen(plane);
+		}
 
 		updateBullets(plane.bullets, deltaTime);
-
-		outScreen(plane);
 	}
 
 	void draw(EnemyNormalPlane& plane)
 	{
 		drawBullets(plane.bullets);
 
-		DrawRectangle(static_cast<int>(plane.hitBox.pos.x), static_cast<int>(plane.hitBox.pos.y), static_cast<int>(plane.hitBox.width), static_cast<int>(plane.hitBox.height), plane.color);
+		if (plane.isAlive)
+		{
+			DrawRectangle(static_cast<int>(plane.hitBox.pos.x), static_cast<int>(plane.hitBox.pos.y), static_cast<int>(plane.hitBox.width), static_cast<int>(plane.hitBox.height), plane.color);
+		}
 	}
 
 	void launch(EnemyNormalPlane& plane, const Vector2 pos, const Vector2 dir)
 	{
+		plane.hp = constInitialHp;
 		plane.hitBox.pos = pos;
 		plane.dir = dir;
 		plane.isAlive = true;
+	}
+
+	void onHit(EnemyNormalPlane& plane, const float damage)
+	{
+		takeDamage(plane, damage);
+	}
+
+	void onCrash(EnemyNormalPlane& plane)
+	{
+		takeDamage(plane, constInitialCrashDamage);
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float delta)
@@ -124,7 +145,7 @@ namespace enemyNormalPlane
 	{
 		float targetDegree = vector::getDegreeFromTwoPoints(plane.hitBox.pos, playerCenter);
 
-		targetDegree = static_cast<float>(GetRandomValue(static_cast<int>(targetDegree-constInitialShootPrecision), static_cast<int>(targetDegree + constInitialShootPrecision)));
+		targetDegree = static_cast<float>(GetRandomValue(static_cast<int>(targetDegree - constInitialShootImprecision), static_cast<int>(targetDegree + constInitialShootImprecision)));
 
 		return vector::getDegreeToVector2(targetDegree);
 	}
@@ -135,5 +156,21 @@ namespace enemyNormalPlane
 		{
 			plane.isAlive = false;
 		}
+	}
+
+	static void takeDamage(EnemyNormalPlane& plane, const float damage)
+	{
+		plane.hp -= damage;
+
+		if (plane.hp <= EPSILON)
+		{
+			plane.hp = 0;
+			die(plane);
+		}
+	}
+
+	static void die(EnemyNormalPlane& plane)
+	{
+		plane.isAlive = false;
 	}
 }

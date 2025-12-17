@@ -16,6 +16,7 @@ namespace player
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 3.f;
 	static const Color constInitialColor = WHITE;
+	static const float constInitialCrashDamage = 2.f;
 
 	//Controls
 	static const KeyboardKey shootKey = KEY_SPACE;
@@ -29,10 +30,14 @@ namespace player
 	static void action(Player& player, float deltaTime);
 	static void shoot(Player& player);
 	static void move(Player& player, float deltaTime);
+	static void takeDamage(Player& player, const float damage);
+	static void die(Player& player);
 
 	Player init()
 	{
 		Player newPlayer;
+
+		newPlayer.isAlive = true;
 
 		newPlayer.hitBox = constHitBoxShape;
 		newPlayer.dir = { 0.f,0.f };
@@ -65,6 +70,16 @@ namespace player
 		drawBullets(player.bullets);
 
 		DrawRectangle(static_cast<int>(player.hitBox.pos.x), static_cast<int>(player.hitBox.pos.y), static_cast<int>(player.hitBox.width), static_cast<int>(player.hitBox.height), player.color);
+	}
+
+	void onHit(Player& player, const float damage)
+	{
+		takeDamage(player,damage);
+	}
+
+	void onCrash(Player& player)
+	{
+		takeDamage(player, constInitialCrashDamage);
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float delta)
@@ -139,5 +154,21 @@ namespace player
 		{
 			player.hitBox.pos = nextPos;
 		}
+	}
+
+	static void takeDamage(Player& player, const float damage)
+	{
+		player.hp -= damage;
+
+		if (player.hp <= EPSILON)
+		{
+			player.hp = 0;
+			die(player);
+		}
+	}
+
+	static void die(Player& player)
+	{
+		player.isAlive = false;
 	}
 }

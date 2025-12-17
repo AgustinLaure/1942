@@ -7,6 +7,8 @@ namespace player
 	static const int maxBulletsPool = 50;
 	struct Player
 	{
+		bool isAlive = true;
+
 		shape::Rectangle hitBox = {};
 
 		Vector2 dir = {};
@@ -23,5 +25,7 @@ namespace player
 	Player init();
 	void update(Player& player, float deltaTime);
 	void draw(Player player);
+	void onHit(Player& player, const float damage);
+	void onCrash(Player& player);
 }
 

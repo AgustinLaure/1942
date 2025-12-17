@@ -13,7 +13,7 @@ namespace shape
 
 	Rectangle initRectangle(const float width, const float height, const Vector2 pos);
 	Vector2 getRectangleCenter(const Rectangle rectangle);
-	bool isRectOnRect(const Vector2 rect1Pos, const int rect1Width, const int rect1Height, const Vector2 rect2Pos, const int rect2Width, const int rect2Height);
+	bool isRectOnRect(const Rectangle rect1, const Rectangle rect2);
 	bool isPointCollidingRect(const Vector2 p, const Rectangle rect);
 }
 

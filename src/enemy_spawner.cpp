@@ -6,6 +6,9 @@ const float EPSILON = 0.00001f;
 
 namespace enemySpawner
 {
+	static const float constInitialEnemySpawnCooldown = 3.f;
+	static float enemySpawnCooldown = constInitialEnemySpawnCooldown;
+
 	static const Vector2 constEnemyDir = { 0.f, 1.f };
 
 	static void spawnEnemy(enemyNormalPlane::EnemyNormalPlane enemyNormalPlanes[], const int enemyNormalPlanePoolSize);

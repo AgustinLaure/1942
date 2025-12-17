@@ -29,5 +29,7 @@ namespace enemyNormalPlane
 	void update(EnemyNormalPlane& plane, const player::Player player, const float deltaTime);
 	void draw(EnemyNormalPlane& plane);
 	void launch(EnemyNormalPlane& plane, const Vector2 pos, const Vector2 dir);
+	void onHit(EnemyNormalPlane& plane, const float damage);
+	void onCrash(EnemyNormalPlane& plane);
 }
 
