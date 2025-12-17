@@ -58,14 +58,14 @@
     <Filter Include="src\game\scenes\main_menu\screens">
       <UniqueIdentifier>{fbc05cf5-4b9f-4255-898e-0ee4b71cefa2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\scenes\main_menu\screens\main_menu">
-      <UniqueIdentifier>{1759ad26-ddfd-4327-8176-292449deed87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\scenes\main_menu\screens\rules">
       <UniqueIdentifier>{3f363736-8a14-4338-b134-dc1542b3dc7b}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\game\scenes\main_menu\screens\credits">
       <UniqueIdentifier>{2e6a06a1-6981-45df-95e0-05a812664bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\main_menu\screens\title">
+      <UniqueIdentifier>{c979e4ab-5d18-483d-8d64-3d8a1f42217e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +107,15 @@
     </ClCompile>
     <ClCompile Include="src\main_menu.cpp">
       <Filter>src\game\scenes\main_menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\title_screen.cpp">
+      <Filter>src\game\scenes\main_menu\screens\title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\credits_screen.cpp">
+      <Filter>src\game\scenes\main_menu\screens\credits</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rules_screen.cpp">
+      <Filter>src\game\scenes\main_menu\screens\rules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +160,18 @@
     </ClInclude>
     <ClInclude Include="src\game_scene.h">
       <Filter>src\game\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\title_screen.h">
+      <Filter>src\game\scenes\main_menu\screens\title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\main_menu_screen.h">
+      <Filter>src\game\scenes\main_menu\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\credits_screen.h">
+      <Filter>src\game\scenes\main_menu\screens\credits</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rules_screen.h">
+      <Filter>src\game\scenes\main_menu\screens\rules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
