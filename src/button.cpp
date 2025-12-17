@@ -1,7 +1,6 @@
 #include "button.h"
 
 #include "raymath.h"
-#include "raylib.h"
 
 namespace button
 {

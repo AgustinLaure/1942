@@ -1,7 +1,5 @@
 #include "screen.h"
 
-#include "raylib.h"
-
 namespace screen
 {
 	static const std::string name = "1942";

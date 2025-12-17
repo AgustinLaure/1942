@@ -1,7 +1,6 @@
 #include "game.h"
 
 #include "screen.h"
-#include "game_scene.h"
 #include "playing.h"
 #include "main_menu.h"
 

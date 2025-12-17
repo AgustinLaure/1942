@@ -1,6 +1,5 @@
 #include "playing.h"
 
-#include "player.h"
 #include "button.h"
 #include "enemy_spawner.h"
 #include "screen.h"

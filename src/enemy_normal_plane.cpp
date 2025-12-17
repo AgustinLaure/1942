@@ -3,7 +3,6 @@
 #include "raymath.h"
 
 #include "screen.h"
-#include "renderer.h"
 
 namespace enemyNormalPlane
 {

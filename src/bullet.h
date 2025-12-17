@@ -2,9 +2,7 @@
 
 #include <string>
 
-#include "raylib.h"
-
-#include "shape.h"
+#include "renderer.h"
 
 namespace bullet
 {

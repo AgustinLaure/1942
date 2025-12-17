@@ -1,6 +1,5 @@
 #pragma once
 
-#include "bullet.h"
 #include "player.h"
 
 namespace enemyNormalPlane
