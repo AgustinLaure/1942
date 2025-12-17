@@ -13,7 +13,7 @@ namespace button
 	{
 		if (Button::onSelect.frameCount < EPSILON)
 		{
-			Button::onSelect = LoadSound("res/sound/sfx/ui/selectSound.ogg");
+			Button::onSelect = LoadSound("res/sounds/sfx/ui/selectSound.ogg");
 			SetSoundVolume(Button::onSelect, 0.1f);
 		}
 

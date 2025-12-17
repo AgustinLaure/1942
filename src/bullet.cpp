@@ -3,6 +3,7 @@
 #include "raymath.h"
 
 #include "screen.h"
+#include "renderer.h"
 
 namespace bullet
 {
@@ -20,8 +21,14 @@ namespace bullet
 		newBullet.speed = preset.speed;
 		newBullet.damage = preset.damage;
 		newBullet.color = preset.color;
+		newBullet.sprite = LoadTexture(preset.spriteRoute.c_str());
 
 		return newBullet;
+	}
+
+	void deinit(Bullet& bullet)
+	{
+		UnloadTexture(bullet.sprite);
 	}
 
 	void update(Bullet& bullet, const float delta)
@@ -32,11 +39,12 @@ namespace bullet
 		}
 	}
 
-	void draw(const Bullet bullet)
+	void draw(Bullet& bullet)
 	{
 		if (bullet.isAlive)
 		{
 			DrawRectangle(static_cast<int>(bullet.hitBox.pos.x), static_cast<int>(bullet.hitBox.pos.y), static_cast<int>(bullet.hitBox.width), static_cast<int>(bullet.hitBox.height), bullet.color);
+			renderer::drawSprite(bullet.sprite, bullet.hitBox, bullet.color);
 		}
 	}
 

@@ -67,6 +67,9 @@
     <Filter Include="src\game\scenes\main_menu\screens\title">
       <UniqueIdentifier>{c979e4ab-5d18-483d-8d64-3d8a1f42217e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\renderer">
+      <UniqueIdentifier>{bfd4ce18-d792-4806-af08-8f3c9fb2c0d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="src\rules_screen.cpp">
       <Filter>src\game\scenes\main_menu\screens\rules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer.cpp">
+      <Filter>src\game\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="src\rules_screen.h">
       <Filter>src\game\scenes\main_menu\screens\rules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer.h">
+      <Filter>src\game\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

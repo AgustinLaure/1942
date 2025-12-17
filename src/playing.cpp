@@ -179,7 +179,7 @@ namespace playing
 			objects::retry = button::init(retryWidth, retryHeight, retryPos, retryText, buttonFontRoute, retryFontSize, retrySpacing, buttonTextColor, buttonBoxColor);
 			objects::menu = button::init(menuWidth, menuHeight, menuPos, menuText, buttonFontRoute, menuFontSize, menuSpacing, buttonTextColor, buttonBoxColor);
 
-			objects::lostMusic = LoadMusicStream("res/sound/music/lost.ogg");
+			objects::lostMusic = LoadMusicStream("res/sounds/music/lost.ogg");
 			SetMusicVolume(objects::lostMusic, 0.1f);
 			objects::lostMusic.looping = true;
 		}
@@ -189,6 +189,7 @@ namespace playing
 			if (!IsMusicStreamPlaying(objects::lostMusic))
 			{
 				PlayMusicStream(objects::lostMusic);
+				SeekMusicStream(objects::lostMusic, 3.f);
 			}
 
 			button::update(objects::retry);
@@ -238,7 +239,7 @@ namespace playing
 			objects::enemyNormalPlanes[i] = enemyNormalPlane::init();
 		}
 
-		objects::playingMusic = LoadMusicStream("res/sound/music/playing.ogg");
+		objects::playingMusic = LoadMusicStream("res/sounds/music/playing.ogg");
 		SetMusicVolume(objects::playingMusic, 0.1f);
 		objects::playingMusic.looping = true;
 
@@ -252,6 +253,12 @@ namespace playing
 
 		pause::deinit();
 		lost::deinit();
+		player::deinit(objects::player);
+
+		for (int i = 0; i < enemyNormalPlanePoolSize; i++)
+		{
+			enemyNormalPlane::deinit(objects::enemyNormalPlanes[i]);
+		}
 	}
 
 	static void update(gameScene::Scenes& currentGameScene, const float deltaTime)

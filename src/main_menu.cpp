@@ -45,7 +45,7 @@ namespace mainMenu
 
 	void init()
 	{
-		objects::menuMusic = LoadMusicStream("res/sound/music/menu.ogg");
+		objects::menuMusic = LoadMusicStream("res/sounds/music/menu.ogg");
 		SetMusicVolume(objects::menuMusic, 0.1f);
 		objects::menuMusic.looping = true;
 

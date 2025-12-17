@@ -3,11 +3,12 @@
 #include "raymath.h"
 
 #include "screen.h"
+#include "renderer.h"
 
 namespace player
 {
 	//InitialConfig
-	static const shape::Rectangle constHitBoxShape = shape::initRectangle(50, 101, { 0,0 });
+	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, { 0,0 });
 	static const Vector2 constBulletSpawnOffset = { constHitBoxShape.width / 2, -10.f };
 	static const float constShootCooldown = 0.5f;
 
@@ -33,6 +34,8 @@ namespace player
 	static void takeDamage(Player& player, const float damage);
 	static void die(Player& player);
 
+	static std::string playerSpriteRoute = "res/sprites/player/player_plane.png";
+
 	Player init()
 	{
 		Player newPlayer;
@@ -44,6 +47,7 @@ namespace player
 		newPlayer.speed = constInitialSpeed;
 		newPlayer.damage = constInitialDamage;
 		newPlayer.hp = constInitialHp;
+		newPlayer.sprite = LoadTexture(playerSpriteRoute.c_str());
 
 		for (int i = 0; i < maxBulletsPool; i++)
 		{
@@ -54,6 +58,15 @@ namespace player
 		newPlayer.color = constInitialColor;
 
 		return newPlayer;
+	}
+
+	void deinit(Player& player)
+	{
+		for (int i = 0; i < maxBulletsPool; i++)
+		{
+			bullet::deinit(player.bullets[i]);
+		}
+		UnloadTexture(player.sprite);
 	}
 
 	void update(Player& player, float deltaTime)
@@ -68,13 +81,14 @@ namespace player
 	void draw(Player player)
 	{
 		drawBullets(player.bullets);
-
 		DrawRectangle(static_cast<int>(player.hitBox.pos.x), static_cast<int>(player.hitBox.pos.y), static_cast<int>(player.hitBox.width), static_cast<int>(player.hitBox.height), player.color);
+
+		renderer::drawSprite(player.sprite, player.hitBox, WHITE);
 	}
 
 	void onHit(Player& player, const float damage)
 	{
-		takeDamage(player,damage);
+		takeDamage(player, damage);
 	}
 
 	void onCrash(Player& player)

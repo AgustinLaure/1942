@@ -3,6 +3,7 @@
 #include "raymath.h"
 
 #include "screen.h"
+#include "renderer.h"
 
 namespace enemyNormalPlane
 {
@@ -13,7 +14,7 @@ namespace enemyNormalPlane
 	static const float constInitialSpeed = 200.f;
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 2.f;
-	static const Color constInitialColor = RED;
+	static const Color constInitialColor = WHITE;
 	static const float constInitialShootcooldown = 0.5f;
 	static const float constInitialShootImprecision = 1.f; //Degrees
 	static const float constInitialCrashDamage = 3.f;
@@ -36,10 +37,15 @@ namespace enemyNormalPlane
 		}
 
 		newPlane.shootCooldown = 0.f;
-
+		newPlane.sprite = LoadTexture("res/sprites/enemies/normal_enemy.png");
 		newPlane.color = constInitialColor;
 
 		return newPlane;
+	}
+
+	void deinit(EnemyNormalPlane& plane)
+	{
+		UnloadTexture(plane.sprite);
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float deltaTime);
@@ -74,6 +80,7 @@ namespace enemyNormalPlane
 		if (plane.isAlive)
 		{
 			DrawRectangle(static_cast<int>(plane.hitBox.pos.x), static_cast<int>(plane.hitBox.pos.y), static_cast<int>(plane.hitBox.width), static_cast<int>(plane.hitBox.height), plane.color);
+			renderer::drawSprite(plane.sprite, plane.hitBox, plane.color);
 		}
 	}
 

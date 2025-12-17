@@ -15,6 +15,7 @@ namespace player
 		float speed = 0.f;
 		float damage = 0.f;
 		float hp = 0.f;
+		Texture2D sprite;
 		
 		bullet::Bullet bullets[maxBulletsPool];
 		float shootCooldown = 0.f;
@@ -23,6 +24,7 @@ namespace player
 	};
 
 	Player init();
+	void deinit(Player& player);
 	void update(Player& player, float deltaTime);
 	void draw(Player player);
 	void onHit(Player& player, const float damage);

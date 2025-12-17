@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "raylib.h"
 
 #include "shape.h"
@@ -14,6 +16,7 @@ namespace bullet
 		float speed = 0.f;
 		float damage = 0.f;
 		Color color = WHITE;
+		Texture2D sprite;
 	};
 
 	enum class BulletType
@@ -27,6 +30,7 @@ namespace bullet
 		float speed;
 		float damage;
 		Color color;
+		std::string spriteRoute;
 	};
 
 	static const int maxBulletPresets = 1;
@@ -34,20 +38,22 @@ namespace bullet
 	{
 		{ //Normal
 
-		{				//Hitbox
-			10.f,		//Width
-			5.f,		//Height
-			{0.f,0.f}	//Pos
+		{										//Hitbox
+			5.f,								//Width
+			10.f,								//Height
+			{0.f,0.f}							//Pos
 		},
-		650.f,			//Speed
+		650.f,									//Speed
 		1.f,
-		WHITE			//Color
+		WHITE,									//Color
+		"res/sprites/bullet/bullet.png"			//SpriteRoute
 		}
 	};
 
 	Bullet init(const BulletPreset preset, const Vector2 dir);
+	void deinit(Bullet& bullet);
 	void update(Bullet& bullet, const float delta);
-	void draw(const Bullet bullet);
+	void draw(Bullet& bullet);
 	void shoot(Bullet& bullet, const Vector2 pos, const Vector2 dir);
 	void onCollision(Bullet& bullet);
 }

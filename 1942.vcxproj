@@ -157,6 +157,7 @@
     <ClCompile Include="src\main_menu.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\playing.cpp" />
+    <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\rules_screen.cpp" />
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\shape.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\main_menu_screen.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\playing.h" />
+    <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\rules_screen.h" />
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\shape.h" />
