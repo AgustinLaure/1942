@@ -153,7 +153,9 @@
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\label.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\main_menu.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\playing.cpp" />
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\shape.cpp" />
     <ClCompile Include="src\vector.cpp" />
@@ -165,8 +167,11 @@
     <ClInclude Include="src\enemy_normal_plane.h" />
     <ClInclude Include="src\enemy_spawner.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\game_scene.h" />
     <ClInclude Include="src\label.h" />
+    <ClInclude Include="src\main_menu.h" />
     <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\playing.h" />
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\shape.h" />
     <ClInclude Include="src\vector.h" />

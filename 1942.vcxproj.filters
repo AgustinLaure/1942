@@ -22,29 +22,38 @@
     <Filter Include="src\math\vector">
       <UniqueIdentifier>{2542f07e-1eac-41cb-bf9a-f61b6e5970e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\entitites">
-      <UniqueIdentifier>{b9305bc8-db1c-4a64-ba2e-835fad864485}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\entitites\player">
-      <UniqueIdentifier>{b2121c49-5384-4c62-b9ab-9f14882d6684}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\entitites\bullet">
-      <UniqueIdentifier>{b80a41d2-18b9-48d9-8145-e93a5d139d48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\entitites\enemies">
-      <UniqueIdentifier>{c130a6dd-d53b-457b-bc7c-9fd633962dbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\entitites\enemies\normal_plane">
-      <UniqueIdentifier>{de71ea97-a0fe-48b2-955b-e2d0c06a9411}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\enemySpawner">
-      <UniqueIdentifier>{7298da08-da44-4c79-bcba-d089bbf08727}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\label">
       <UniqueIdentifier>{4627616d-ecc0-438e-9927-ef99f88b8e84}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\button">
       <UniqueIdentifier>{919ef613-7c21-4892-9091-1dad6ee7123e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes">
+      <UniqueIdentifier>{02144845-5522-4460-b961-c1b1176d385c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing">
+      <UniqueIdentifier>{de30553c-3067-499c-b079-3beb62d29a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\entities">
+      <UniqueIdentifier>{d31b0e9a-f1c3-44b8-bbf7-c9cf8960c8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\enemy_spawner">
+      <UniqueIdentifier>{6fc40d7e-1692-4c1d-b12b-c11e8a8d47cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\entities\bullet">
+      <UniqueIdentifier>{b1668653-5916-4bd4-ae11-18759b911e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\entities\enemies">
+      <UniqueIdentifier>{d643d66b-19da-4b27-af5e-462bb2a20ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\entities\enemies\normal_plane">
+      <UniqueIdentifier>{a7c30599-8197-490c-91fe-4b92ae62a973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\playing\entities\player">
+      <UniqueIdentifier>{cf90a741-24ba-4a60-926d-2f6a5f2c1024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\scenes\main_menu">
+      <UniqueIdentifier>{50b501eb-62e2-4610-a4c8-3fe3ddf2b52b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,23 +72,29 @@
     <ClCompile Include="src\shape.cpp">
       <Filter>src\math\shape</Filter>
     </ClCompile>
-    <ClCompile Include="src\player.cpp">
-      <Filter>src\game\entitites\player</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bullet.cpp">
-      <Filter>src\game\entitites\bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="src\enemy_normal_plane.cpp">
-      <Filter>src\game\entitites\enemies\normal_plane</Filter>
-    </ClCompile>
-    <ClCompile Include="src\enemy_spawner.cpp">
-      <Filter>src\game\enemySpawner</Filter>
-    </ClCompile>
     <ClCompile Include="src\button.cpp">
       <Filter>src\button</Filter>
     </ClCompile>
     <ClCompile Include="src\label.cpp">
       <Filter>src\label</Filter>
+    </ClCompile>
+    <ClCompile Include="src\playing.cpp">
+      <Filter>src\game\scenes\playing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\enemy_spawner.cpp">
+      <Filter>src\game\scenes\playing\enemy_spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bullet.cpp">
+      <Filter>src\game\scenes\playing\entities\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\enemy_normal_plane.cpp">
+      <Filter>src\game\scenes\playing\entities\enemies\normal_plane</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>src\game\scenes\playing\entities\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_menu.cpp">
+      <Filter>src\game\scenes\main_menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,26 +110,35 @@
     <ClInclude Include="src\shape.h">
       <Filter>src\math\shape</Filter>
     </ClInclude>
-    <ClInclude Include="src\player.h">
-      <Filter>src\game\entitites\player</Filter>
-    </ClInclude>
-    <ClInclude Include="src\bullet.h">
-      <Filter>src\game\entitites\bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\enemy_normal_plane.h">
-      <Filter>src\game\entitites\enemies\normal_plane</Filter>
-    </ClInclude>
-    <ClInclude Include="src\enemy_spawner.h">
-      <Filter>src\game\enemySpawner</Filter>
-    </ClInclude>
-    <ClInclude Include="src\enemies.h">
-      <Filter>src\game\entitites\enemies</Filter>
-    </ClInclude>
     <ClInclude Include="src\button.h">
       <Filter>src\button</Filter>
     </ClInclude>
     <ClInclude Include="src\label.h">
       <Filter>src\label</Filter>
+    </ClInclude>
+    <ClInclude Include="src\playing.h">
+      <Filter>src\game\scenes\playing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy_spawner.h">
+      <Filter>src\game\scenes\playing\enemy_spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bullet.h">
+      <Filter>src\game\scenes\playing\entities\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy_normal_plane.h">
+      <Filter>src\game\scenes\playing\entities\enemies\normal_plane</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemies.h">
+      <Filter>src\game\scenes\playing\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player.h">
+      <Filter>src\game\scenes\playing\entities\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\main_menu.h">
+      <Filter>src\game\scenes\main_menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_scene.h">
+      <Filter>src\game\scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
