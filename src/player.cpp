@@ -12,11 +12,17 @@ namespace player
 	Sound Player::explosion;
 
 	//InitialConfig
-	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, { 0,0 });
-	static const Vector2 constBulletSpawnOffset = { constHitBoxShape.width / 2, -10.f };
+	static const Vector2 constIniPos = { screen::width / 2, screen::height - 125.f };
+	static const shape::Rectangle constHitBoxShape = shape::initRectangle(75, 75, constIniPos);
+	static const float constScoreAddPerHit = 5.f;
+	static const float constScoreAddPerKill = 13.f;
+
+	//Shoot
+	static const Vector2 constShootDir = { 0,-1 };
+	static const Vector2 constCenterBulletSpawnOffset = { constHitBoxShape.width / 2, -10.f };
+	static const Vector2 constBulletSpawnOffset = { 10.f,5.f };
 	static const float constShootCooldown = 0.5f;
-	static const float scoreAddPerHit = 5.f;
-	static const float scoreAddPerKill = 13.f;
+	static const int constMaxBulletsPerShot = 5;
 
 	//Sound
 	static const float timeBetweenlowHpSound = 1.f;
@@ -24,7 +30,6 @@ namespace player
 	static const float lowHpSoundScale = 0.f;
 	static const float explosionSoundScale = 0.2f;
 
-	static const Vector2 constShootDir = { 0,-1 };
 	static const float constInitialSpeed = 500.f;
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 1.f;
@@ -66,7 +71,7 @@ namespace player
 		{
 			Player::lowHpSound = LoadSound(lowHpRoute.c_str());
 		}
-		
+
 		Player newPlayer;
 
 		newPlayer.isAlive = true;
@@ -130,12 +135,12 @@ namespace player
 
 	void scoreAddHit(Player& player)
 	{
-		player.score += scoreAddPerHit;
+		player.score += constScoreAddPerHit;
 	}
 
 	void scoreAddKill(Player& player)
 	{
-		player.score += scoreAddPerKill;
+		player.score += constScoreAddPerKill;
 	}
 
 	static void updateBullets(bullet::Bullet bullets[], const float delta)
@@ -170,15 +175,47 @@ namespace player
 	{
 		if (IsKeyDown(shootKey) && player.shootCooldown < EPSILON)
 		{
+			bullet::Bullet* availableBullets[constMaxBulletsPerShot];
+
+			int counter = 0;
 			for (int i = 0; i < maxBulletsPool; i++)
 			{
 				if (!player.bullets[i].isAlive)
 				{
-					bullet::shoot(player.bullets[i], player.hitBox.pos + constBulletSpawnOffset, constShootDir);
-					player.shootCooldown = constShootCooldown;
-
-					return;
+					availableBullets[counter] = &player.bullets[i];
+					counter++;
+					if (counter >= constMaxBulletsPerShot)
+					{
+						break;
+					}
 				}
+			}
+
+			if (counter >= constMaxBulletsPerShot)
+			{
+				float row = 0.f;
+				float current = 1.f;
+				for (int i = 0; i < constMaxBulletsPerShot; i++)
+				{
+					Vector2 bulletPos = player.hitBox.pos + constCenterBulletSpawnOffset;
+					float newX = bulletPos.x + constBulletSpawnOffset.x * row * current;
+					float newY = bulletPos.y + constBulletSpawnOffset.y * row;
+					bulletPos = {newX, newY};
+
+					if (i % 2 == 0)
+					{
+						row++;
+					}
+
+					if (i != 0)
+					{
+						current *= -1;
+					}
+
+					bullet::shoot(*availableBullets[i], bulletPos, constShootDir);
+				}
+
+				player.shootCooldown = constShootCooldown;
 			}
 		}
 	}

@@ -4,7 +4,7 @@
 
 namespace player
 {
-	static const int maxBulletsPool = 50;
+	static const int maxBulletsPool = 100;
 	struct Player
 	{
 		static Sound explosion;
