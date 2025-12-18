@@ -45,7 +45,6 @@ namespace button
 	void draw(const Button button)
 	{
 		DrawTextEx(GetFontDefault(), button.text.text.c_str(), button.text.pos, button.text.fontSize, button.text.spacing, button.text.color);
-		DrawRectangleLines(static_cast<int>(button.body.pos.x), static_cast<int>(button.body.pos.y), static_cast<int>(button.body.width), static_cast<int>(button.body.height), button.color);
 	}
 
 	void deinit()
