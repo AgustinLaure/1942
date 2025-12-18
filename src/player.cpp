@@ -26,14 +26,14 @@ namespace player
 	//Sound
 	static const float timeBetweenlowHpSound = 1.f;
 
-	static const float lowHpSoundScale = 0.f;
+	static const float lowHpSoundScale = 0.2f;
 	static const float explosionSoundScale = 0.2f;
 
 	static const float constInitialSpeed = 500.f;
 	static const float constInitialDamage = 1.f;
 	static const float constInitialHp = 100.f;
 	static const Color constInitialColor = WHITE;
-	static const float constInitialCrashDamage = 2.f;
+	static const float constInitialCrashDamage = 10.f;
 
 	//Controls
 	static const KeyboardKey shootKey = KEY_SPACE;
@@ -270,7 +270,7 @@ namespace player
 	{
 		player.lowHpCooldown -= delta;
 
-		if (player.lowHpCooldown < EPSILON && player.hp < constInitialHp)
+		if (player.lowHpCooldown < EPSILON && player.hp < constInitialHp / 2)
 		{
 			player.lowHpCooldown = timeBetweenlowHpSound;
 			PlaySound(player.lowHpSound);
