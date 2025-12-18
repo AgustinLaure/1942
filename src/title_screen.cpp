@@ -16,7 +16,7 @@ namespace titleScreen
 	static const Color titleColor = WHITE;
 
 	//Version
-	static const std::string versionText = "v0.6";
+	static const std::string versionText = "v1.0";
 	static const int versionFontSize = 30;
 	static const label::FontName versionFont = label::FontName::Militar;
 	static const Vector2 versionPos = { screen::width - 100, screen::height-50};
